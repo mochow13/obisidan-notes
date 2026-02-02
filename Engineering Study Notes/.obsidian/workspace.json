@@ -1,0 +1,223 @@
+{
+  "main": {
+    "id": "271dbccf01388660",
+    "type": "split",
+    "children": [
+      {
+        "id": "ca4671d9a79dd71f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72d95b5a356a3f0d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Miscellaneous/Claude Code - Best Practices.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Claude Code - Best Practices"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7933055ca7234067",
+    "type": "split",
+    "children": [
+      {
+        "id": "22a55c5aa705204c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d961e957a62d1331",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c0ef1585df5b11e7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d56bc4c41de24acf",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "72d93647447f888b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4dc8c5a19bc97ca9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b62b7ad56e0967e0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "The Big LLM Architecture Comparison.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for The Big LLM Architecture Comparison"
+            }
+          },
+          {
+            "id": "eae7aee95989c072",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "The Big LLM Architecture Comparison.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from The Big LLM Architecture Comparison"
+            }
+          },
+          {
+            "id": "d9822119b1be0d0d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ef3a080e01a0c10f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3518f0ce80116641",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "The Big LLM Architecture Comparison.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of The Big LLM Architecture Comparison"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "72d95b5a356a3f0d",
+  "lastOpenFiles": [
+    "Backend Engineering/Bloom Filters.md",
+    "Backend Engineering/Choosing the Correct Garbage Collector.md",
+    "Miscellaneous/Claude Code - Best Practices.md",
+    "Screenshot 2026-02-02 at 23.05.21.png",
+    "Backend Engineering/Distributed Transactions in DynamoDB.md",
+    "Dutch/KNM Preparation.md",
+    "Miscellaneous/Useful Commands.md",
+    "Miscellaneous/Various Configs.md",
+    "Backend Engineering/Deep Dive on Amazon S3.md",
+    "Artificial Intelligence/Reinforcement Learning with Verifiable Rewards.md",
+    "Artificial Intelligence/Context Engineering for AI Agents.md",
+    "Artificial Intelligence/Reasoning Models.md",
+    "Artificial Intelligence/LLM Inference Optimisations.md",
+    "Untitled.md",
+    "Miscellaneous",
+    "Screenshot 2026-01-21 at 19.47.36.png",
+    "Screenshot 2026-01-20 at 21.36.53.png",
+    "Screenshot 2026-01-20 at 21.34.53.png",
+    "Screenshot 2026-01-19 at 23.38.16.png",
+    "Screenshot 2026-01-19 at 23.34.17.png",
+    "Screenshot 2026-01-19 at 23.31.51.png",
+    "Screenshot 2026-01-19 at 23.02.20.png",
+    "Screenshot 2026-01-19 at 22.59.34.png",
+    "Screenshot 2026-01-19 at 22.13.48.png",
+    "Dutch",
+    "Backend Engineering/DynamoDB - resilience & lessons from the Oct 2025 service disruption.md",
+    "Artificial Intelligence/AI Agents from First Principles.md",
+    "Artificial Intelligence/The Big LLM Architecture Comparison.md",
+    "Untitled.base",
+    "Backend Engineering/Atlassian - Our not-so-magic journey scaling low latency, multi-region services on AWS.md",
+    "Backend Engineering/Atlassian - Here’s how one of Atlassian’s critical services consistently gets above 99.9999% of availability.md",
+    "Artificial Intelligence",
+    "Backend Engineering",
+    "Welcome.md"
+  ]
+}
