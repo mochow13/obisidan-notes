@@ -1,4 +1,5 @@
-# Booking.com Claude Code
+## Booking.com Claude Code
+
 ```json
 {
   "apiKeyHelper": "bk auth:issue-token || (bk auth:login > /dev/null 2>&1 && bk auth:issue-token)",
@@ -13,6 +14,3 @@
   ]
 }
 ```
-
-# Kimi Code API Key
-`sk-kimi-IA4HjjpCAC7BDScmk7PEM7WUpN0j5lzrXip4XSSW1Ljb4PcWVKQwm7Ih3MvleGzf`

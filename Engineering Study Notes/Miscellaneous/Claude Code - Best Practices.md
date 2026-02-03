@@ -67,3 +67,34 @@ The above can be invoked as `/fix-issue 1234`!
 ## Custom subagents
 
 Claude can be asked to work on explicit subagents.
+
+```markdown
+---
+name: security-reviewer
+description: Reviews code for security vulnerabilities
+tools: Read, Grep, Glob, Bash
+model: opus
+---
+You are a senior security engineer. Review code for:
+- Injection vulnerabilities (SQL, XSS, command injection)
+- Authentication and authorization flaws
+- Secrets or credentials in code
+- Insecure data handling
+
+Provide specific line references and suggested fixes.
+```
+
+The above is a custom subagent example that can be asked to use explicitly.
+
+## `AskUserQuestion` tool
+
+Claude can extensively interview the user using `AskUserQuestion` tool.
+
+```markdown
+I want to build [brief description]. Interview me in detail using the AskUserQuestion tool.
+
+Ask about technical implementation, UI/UX, edge cases, concerns, and tradeoffs. Don't ask obvious questions, dig into the hard parts I might not have considered.
+
+Keep interviewing until we've covered everything, then write a complete spec to SPEC.md.
+```
+

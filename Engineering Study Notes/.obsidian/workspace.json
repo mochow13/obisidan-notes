@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Miscellaneous/Claude Code - Best Practices.md",
+                "file": "Miscellaneous/Various Configs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Claude Code - Best Practices"
+              "title": "Various Configs"
             }
           }
         ]
@@ -185,14 +185,14 @@
   },
   "active": "72d95b5a356a3f0d",
   "lastOpenFiles": [
+    "Miscellaneous/Claude Code - Best Practices.md",
+    "Miscellaneous/Useful Commands.md",
+    "Miscellaneous/Various Configs.md",
     "Backend Engineering/Bloom Filters.md",
     "Backend Engineering/Choosing the Correct Garbage Collector.md",
-    "Miscellaneous/Claude Code - Best Practices.md",
     "Screenshot 2026-02-02 at 23.05.21.png",
     "Backend Engineering/Distributed Transactions in DynamoDB.md",
     "Dutch/KNM Preparation.md",
-    "Miscellaneous/Useful Commands.md",
-    "Miscellaneous/Various Configs.md",
     "Backend Engineering/Deep Dive on Amazon S3.md",
     "Artificial Intelligence/Reinforcement Learning with Verifiable Rewards.md",
     "Artificial Intelligence/Context Engineering for AI Agents.md",
