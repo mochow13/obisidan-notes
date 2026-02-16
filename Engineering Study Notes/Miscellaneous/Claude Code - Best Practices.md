@@ -29,7 +29,7 @@ Give Claude a way to verify its work.
 
 `CLAUDE.md` is loaded in every session in the context.
 
-> *Keep it concise. For each line, ask: _“Would removing this cause Claude to make mistakes?”_ If not, cut it. Bloated `CLAUDE.md` files cause Claude to ignore your actual instructions!*
+> *Keep it concise. For each line, ask: _“Would removing this cause Claude to make mistakes?” If not, cut it. Bloated `CLAUDE.md` files cause Claude to ignore your actual instructions!*
 
 What we can include:
 
@@ -98,3 +98,28 @@ Ask about technical implementation, UI/UX, edge cases, concerns, and tradeoffs. 
 Keep interviewing until we've covered everything, then write a complete spec to SPEC.md.
 ```
 
+## Useful commands
+
+- `/clear`  to clear the context
+- `/compact
+	- To compact as per what Claude thinks
+	- `/compact <instruction>` to guide how to compact
+	- Can be guided on `CLAUDE.md`
+- `/rewind` to go back to a specific checkpoint that is maintained by Claude
+- `claude --continue` to resume the most recent conversation
+- `claude --resume` to select which conversation to resume
+- `/renamde` to give name to a conversation
+- `claude -p "<prompt>" --output-format <format>`
+	- This runs a Claude Code instance in "headless" mode where no interactive shell is running
+- `--allowedTools` flag to allow specific tools
+- Loop through multiple files by calling Claude headless:
+
+```bash
+for file in $(cat files.txt); do
+  claude -p "Migrate $file from React to Vue. Return OK or FAIL." \
+    --allowedTools "Edit,Bash(git commit *)"
+done
+```
+
+- `/memory` to edit global (`~/.claude/CLAUDE.md`) or local (`./CLAUDE.md`) files
+- `/context` to view current status of the context

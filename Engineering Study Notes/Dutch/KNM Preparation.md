@@ -26,3 +26,306 @@
 
 ![[Screenshot 2026-01-21 at 19.47.36.png]]
 
+# Thema 1: Werk en inkomen
+## Words
+
+- **Uitzendbureaus** - employment agencies
+- **Solicitatiegesprek** - job interview
+- **Arbeidsvoorwaarden** - working condition
+- **Arbeidsmarkt** - job market
+- **Vooropleiding** - preliminary education
+- **Beheersing** - Grasp, control
+- **Beinvloeden** - to influence
+- **Bijscholing** - learn something extra
+- **Omscholing** - changing profession (retraining)
+- **Beroep** - profession
+- **Vaardigheid** - skill
+- **Werkloos** - unemployed
+- **Uitkering** - benefit
+- **Arbeidsovereenkomst** - employment contract
+- **Arbeidsomstandigheid** - working condition
+- **Verlof** - leave
+- **Tijdscrijven** - time register
+- **Vooltijd** - full time (36-40h)
+- **Deeltijd** - parttime
+- **Vakbonden** - unions (FNV, De Unie etc)
+- **Vertrouwenspersoon** - person of confidence / confidant
+
+## Knowledge
+
+- **Internationale Diploma Waardering (IDW)** helps to get foreign diploma recognised in Netherlands. They work with Nuffic which is a Dutch organisation for internationalisation of education. They support and assist schools and educational institutions in shaping internationalisation and international collaboration.
+- **BIG register** - BIG-registration is obligatory for 11 healthcare professions. The BIG register is a legal, online and public register for Professions in Individual Health Care (Beroepen in de Individuele Gezondheidszorg). Only healthcare professionals who are registered in the BIG register, may use the protected professional title and may independently perform the reserved actions associated with the profession. Healthcare professionals with a foreign diploma must have their diploma officially recognised before they can register.
+- **Ervaringscertificaat (EVC)** - gives a certificate of experience to justify experience from abroad.
+- **Uitvoeringsinstituut Werknemersverzekeringen (UWV)** helps people who are out of work or unable to work. We do this by providing benefits and by getting people back into work. We also support employers on all issues relating to employment.
+- When to contact UWV
+	- If one has worked 26 weeks in last 36 weeks and now unemployed, he goes to UWV and will receive **WW-uitkering** (*werkloosheidsuitkering*)
+	- If one is not suitable for work (*arbeidsongeschikt*) but was working will receive WIA/ZW-uitkering
+- **Beoordelingsgesprek / Functioneringsgesprek** - appraisal or performance review.
+
+> *De WIA-uitkering is er voor iemand die 2 jaar of langer ziek is en daardoor niet of minder kan werken.*
+> *Een Ziektewet-uitkering is voor zieke mensen zonder vaste baan of met een uitkering. Soms krijgen ook werknemers in loondienst een Ziektewet-uitkering.*
+> *Een WW-uitkering (werkloosheidsuitkering) is een tijdelijk inkomen voor mensen die werkloos raken.*
+
+- When to contact gemeente
+	- If the person has not worked enough will receive *bijstandsuitkering*
+- **Toeslagen** - relief for various situations (huurtoeslag, zorgtoeslag, kinderopvangtoeslag, kindgebonden budget etc)
+	- These can be requested in Belsatingdienst
+- **Collectieve arbeidsovereenkomst (CAO)** - employment contract in a sector where they have their own agreement. Not everyone has CAO. A holiday is a day off only if it is in someone's CAO.
+- Contracts:
+	- **Vast contract** - fixed contract
+	- **Tijdelijk contract** - temporary contract
+		- After maximum 3 temporary contract in 3 years the company has to offer a fixed contract to keep the employee
+	- **Via een uitzendbureau** - via employment agency
+- **Werknemersparticipatie** - employee participation
+	- **Ondernemingsraad (OR)** - works council, for corporations
+	- If more than 50 employees then there should be a works council in the company
+	- **Medezeggenschapsraad (MR)** - same thing as OR but for education institutions
+	- **Personeelsvereniging** - Staff association. Focuses on social activities in the company.
+- **Werknemerspremies** - Premium for employee insurance
+	- Employee insurance in the Netherlands (**werknemersverzekeringen**) is a mandatory, employer-paid, social security system that provides income protection for staff in case of sickness, long-term disability, or unemployment.
+- **Volksverzekeringen** - National insurance premiums in the Netherlands (_volksverzekeringen_) are mandatory social security contributions for all residents, typically totaling 27.65% (as of 2025) of income, deducted by employers. They fund state pensions (AOW), survivor benefits (ANW), and long-term care (Wlz). These are often called social security premiums or payroll taxes, and they apply to most earned income.
+- **Kamer voor Koophandel (KvK)** - Chamber of Commerce
+	- Obligatory to register in KvK if starting a business or becoming self-employed
+	- Benefits become invalid if registered with KvK
+# Thema 2: Omgangsvormen, normen en waarden
+## Words
+
+- **Omgangsvormen** - manners
+- **Normen** - standards
+- **Waarden** - values
+- **Borrelhapjes** - snacks
+- **Beschuit met muisjes** - rusk with aniseed (blue for boy, pink for girl)
+- **Huwelijkse voorwaarden** - prenuptial agreement
+- **Gemeenschap van goederen** - community of property (equal distribution in marriage)
+- **Rouwstoet** - funeral procession
+- **Rouwadvertentie** - obituary
+- **Alimentatie** - alimony
+- **Dopen** - baptize
+- **Communie** - communion
+
+## Knowledge
+
+- **Passen** - holiday in Spring, known as Easter—the day when Jesus resurrected
+- **4 en 5 mei** - WWII, on May 4 at 8pm 2 minute silence for soldiers and victims, 5 May celebration for liberation from Germans but only day off once every 5 year
+- **Sinterklaas** - the birthday of Bischop Sint-Nicolaas
+- **Carnaval** - in South, a week of celebration
+- **Keti-Koti** - 1 July, the abolition of slavery
+- **Communie** - kids get baptized around 7 to 8 years
+
+# Thema 3: Wonen
+## Words
+
+- **Onroerendezaakbelasting (OZB)** - property tax
+- **Afvalstoffenheffing** - waste disposal tax
+- **Rioolheffing** - sewage water tax
+- **Kwijtschelding** - remission (for example, from tax if someone has low income)
+- **Huisvestingsvergunning** - housing permit
+- **Verbouwen** - renovate
+- **Rotooi** - mess
+- **Bekeuring** - fine
+- **Energierekening** - energy bill
+- **Storingen** - malfunctions
+- **Loodgieter** - plumber
+- **Zuinig** - economical
+- **Beltegoed** - calling credit
+- **Aansprakelijkheidsverzekering (AVP)**  - personal liability insurance (you or your kid does damage to someone else)
+- **Inboedelverzekering** - home content insurance
+- **Schade** - injury
+- **Woonhuisverzekering / opstalverzekering** - home / building insurance
+- **Autoverzekering of WA-verzekering** - third-party liability insurance where damage is caused by motor vehicles
+- **Verzekeringsmaatschappijen** - insurance companies
+- **Onderverhuur** - subletting
+- **Wettelijk vastgestelde** - legally established
+- **Huurprijscheck** - point-based system
+- **Leveringsakte** - deed of sale
+- **Leverancier** - supplier
+- **Voorschot** - advance payment
+- **Kachel** - heater
+- **Inzamelpunt** - collection point
+- **Weigeren** - refuse
+## Knowledge
+
+- **Huurcommissie** - commission to go to over disputes on rental price or maintenance
+- **Juridisch loket** - legal aid service—they give free advice if needed on rental issues
+- **Gemeente huurteam** - municipality has rental team to help renters
+- **Social huur** - low income rental housing
+- **Woningcooperaties** - housing association for social rent
+- **Woningbouwvereniging** - housing association (they rent social houses, they don't build)
+- **Vrij huursector** - free sector where you need to go to a private individual or agent to rent
+- **Koopsector** - buying sector where a mortgage is needed and also a notary
+- Funda and Pararius for free sector, municipal websites for social housing
+- Need to register with gemeente for social housing—for some gemeente it can take 7y
+- **Woningnet** - website for checking social housing
+- **Vereniging van eigenaren** - owners association in apartment buildings
+- Problem with gas or electricity — call provider
+- If there is a danger like smelling gas — call emergency number: 0800-9009 of 112
+- National Storingsnummer - national fault number
+- **Jaarafrekening** - yearly bill for energy
+- **Vast tarief** - fixed contract with energy provider
+- **Variabel tarief** - variable contract
+- **Milieustraat** - recycling center where any waste that doesn't go to bins can be thrown
+- **Klein chemisch afval (KCA)** can be thrown in gemeentedepot, chemokar, KCA-depot, in the shop where it was bought (bulbs, batteries, photo chemicals)
+
+![[Screenshot 2026-02-14 at 19.04.48.png]]
+
+Where to throw which trash:
+## 1. Groente-, Fruit- en Tuinafval (GFT)
+**Organic / Compost Waste**
+
+| Status | Dutch Word | English Meaning |
+| :--- | :--- | :--- |
+| ✅ **Yes** | Etensresten | Food scraps / leftovers |
+| ✅ **Yes** | Botjes | Small bones |
+| ✅ **Yes** | Koffieprut | Coffee grounds |
+| ✅ **Yes** | Klein snoeiafval | Small pruning waste |
+| ❌ **No** | Kattenbakvulling | Cat litter |
+| ❌ **No** | Bioplastics | Bioplastics |
+| ❌ **No** | Luiers | Diapers |
+| ❌ **No** | Kaaskorst | Cheese rind |
+## 2. Papier
+**Paper (Must be dry)**
+
+| Status    | Dutch Word                  | English Meaning                  |
+| :-------- | :-------------------------- | :------------------------------- |
+| ✅ **Yes** | Kranten                     | Newspapers                       |
+| ✅ **Yes** | Enveloppen                  | Envelopes                        |
+| ✅ **Yes** | Kartonnen dozen             | Cardboard boxes                  |
+| ✅ **Yes** | Folders & tijdschriften     | Flyers & magazines               |
+| ❌ **No**  | Pizzadozen (met vetvlekken) | Pizza boxes (with grease stains) |
+| ❌ **No**  | Kartonnen koffiebekers      | Cardboard coffee cups            |
+## 3. Plastic, Blik, Drankkarton (PBD)
+**Plastic, Cans, Drink Cartons (Must be empty)**
+
+| Status | Dutch Word | English Meaning |
+| :--- | :--- | :--- |
+| ✅ **Yes** | Aluminiumfolie | Aluminum foil |
+| ✅ **Yes** | Blikjes en deksels | Cans and lids |
+| ✅ **Yes** | Plastic verpakkingen | Plastic packaging |
+| ✅ **Yes** | Melk- / drinkpakken | Milk / drink cartons |
+| ❌ **No** | Fruitnetjes | Fruit nets (mesh bags) |
+| ❌ **No** | Piepschuim | Styrofoam |
+| ❌ **No** | Plastic > 75cm | Plastic larger than 75cm |
+| ❌ **No** | Volle verpakkingen | Full/unopened packaging |
+## 4. Glas
+**Glass (Must be shaken/scraped empty)**
+
+| Status | Dutch Word | English Meaning |
+| :--- | :--- | :--- |
+| ✅ **Yes** | Glazen flessen | Glass bottles |
+| ✅ **Yes** | Glazen potten | Glass jars |
+| ✅ **Yes** | Glazen verpakkingen | Glass packaging (e.g. nail polish) |
+| ❌ **No** | Drinkglazen | Drinking glasses |
+| ❌ **No** | Gloeilampen | Incandescent light bulbs |
+| ❌ **No** | Ovenschalen | Oven dishes |
+| ❌ **No** | Spiegels | Mirrors |
+## 5. Textiel
+**Textiles (Must be clean and dry)**
+
+| Status | Dutch Word | English Meaning |
+| :--- | :--- | :--- |
+| ✅ **Yes** | Alle soorten kleding | All types of clothing |
+| ✅ **Yes** | Kapotte kleding | Damaged/torn clothing |
+| ✅ **Yes** | Schoenen | Shoes |
+| ✅ **Yes** | Beddengoed | Bedding |
+| ❌ **No** | Kleren met verf- of olievlekken | Clothes with paint or oil stains |
+| ❌ **No** | Matrassen, kussens en dekbedden | Mattresses, pillows and duvets |
+# Thema 4: Gezondheid en gezondheidszorg
+## Words
+
+- **Beroepsgeheim** - professional secrecy
+- **Drogisterij** - drug store
+- **Ontwikkeling** - development
+- **Hulpmiddelen** - devices
+- **Thuszorg** - home care
+- **Dagbesteding** - day care
+- **Woningaanpassingen** - adjustment of the house
+- **Levensbedreigend** - life threatening
+- **Huisartsenpost** - after hours GP
+- **Logopedie** - speech therapy
+- **Ergotherapie** - occupational therapy
+- **Vergelijkingswebsites** - comparison websites
+## Knowledge
+
+- Praktijkondersteuner is a person helping the GP with chronic illness or psychological issues
+- Kraamzorg requires personal contribution of 5 euro per hour
+- Maternity leave (zwangerschsapverlof) is minimum 16 weeks
+- First line of healthcare:
+	- Husarts (GP)
+	- Tandarts (dentist)
+	- Fysiotherapeut (physio)
+	- Maatschappelijk werker (social worker)
+	- Wijkverpleegkundige (nurse from neighbourhood)
+- Second line of healthcare:
+	- Ziekenhuis (hospital)
+	- Kaakchirurg (oral surgeon)
+	- Revalidatiezorg (rehab)
+	- Gespecialiseerde zorg (special care)
+- Zorgindicatie - official judgement from a professional for the type of care needed for a person
+	- Any special care a person may need will have to be indicated by the zorgindicatie
+	- **Wet langdurige zorg (Wlz):** Long-term Care Act
+		- For people who need 24-hour intensive care or supervision (e.g., elderly care or specialized disability care).
+	- **Wet maatschappelijke ondersteuning (Wmo):** Social Support Act
+		- Handled by the local municipality; it covers things like home help, wheelchairs, or modifications to your house to help you live independently.
+    - **De Zorgverzekeringswet (Zvw):** Healthcare Insurance Act
+		- The standard health insurance that covers "curative" care, like doctors, hospitals, and home nursing.
+- For non-life threatening situations, call husartsenpost
+	- Not taken from eigen risico
+- Spoedeisende hulppost - emergency care - don't go without advised by GP
+- Zwangerschap en geboortezorg are not taken from eigen risico
+- Wijkverpleging (district nursing) also not taken from eigen risico
+- **Gecombineerde leefstijlinterventie** - combined lifestyle intervention for lifestyle (not taken from eigen risico)
+- Changing insurance:
+	- Before 31st December
+	- 1st January deadline for stopping old insurer and 1st February for starting the new one
+- Insurance can be claimed within 3y after
+- Gemeente has wijkteam
+	- Helps with poverty, social isolation, elderly people
+# Thema 5: Geschiedenis and geografie
+# Words
+
+- **Scheepvaart** - shipping, sailing
+- **Slavernij** - slavery
+- **Watersnoodramp** - water disaster
+- **Zelfbeschikking** - self-determination
+# Knowledge
+
+- Goud eeuw - golden century of 17th (1600-1699)
+- Verenigde Oost-Indische Compagnie (VOC) is the Dutch East Indian Company
+- Kolonien van Nederland
+	- Suriname - independent in 1975
+	- Aruba (1986), Bonaire (2010), Curacao (2010) - still part of koninkrijk
+	- Saba, Sint-Eustatius, Sint-Maarten - became special gemeente in Netherlands (in 2010)
+	- Nederlands-Indie (Indonesia) - became independent in 1949
+- Dijken, dammen en duinen protect 60% of NL - 9M people
+- Molen (windmills) can also be used for pumping water out
+- Uiterwaarden - little dijken around the river allowed to overflow
+- Polder - land claimed from water
+- Afsluitdijk - the dijk that was created to control the water in the northern side and created Flevoland / Flevopolder
+- Deltawerken - dam to control Zeeland, Noord-Brabant, Zuid-Holland
+- In 1953, the flood was the worst disaster in 20th century
+	- Caused by north-east storm and spring high-waves
+	- 1836 people died
+	- 40k livestock, 140k chicken-birds died
+	- Water went up 4.5m higher than normal
+	- 20% of the country under sea
+	- 30% under 1m above
+	- Dijken were not well-maintained because of war
+- Wilhelmus - national anthem
+- Tweede wereldoorlog
+	- From 1939 to 1945 Netherlands was occupied by Germany
+	- Rotterdam was destroyed
+- Liberation in 1945
+	- 4th May - commemoration (hardekening)
+	- 5th May - celebration (vieren)
+- After second world war, immigrants came
+	- To rebuild the country
+	- Netherlands made deals with Spain, Portugal, Turkiye, Morocco, Italy, Jugoslavia etc.
+- Europese Unie (EU)
+- Noord-Atlantische Verdragsorganisatie (NAVO)
+- Verenigde Naties (VN)
+- Netherlands has rights for:
+	- Abortus
+	- Homohuwelijken
+	- Euthasie
+- Dutch provinces 
+![](https://dutchreview.com/wp-content/uploads/map-of-the-Netherlands-1.jpg)
