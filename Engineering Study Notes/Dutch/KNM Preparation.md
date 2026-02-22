@@ -56,7 +56,7 @@
 - **Internationale Diploma Waardering (IDW)** helps to get foreign diploma recognised in Netherlands. They work with Nuffic which is a Dutch organisation for internationalisation of education. They support and assist schools and educational institutions in shaping internationalisation and international collaboration.
 - **BIG register** - BIG-registration is obligatory for 11 healthcare professions. The BIG register is a legal, online and public register for Professions in Individual Health Care (Beroepen in de Individuele Gezondheidszorg). Only healthcare professionals who are registered in the BIG register, may use the protected professional title and may independently perform the reserved actions associated with the profession. Healthcare professionals with a foreign diploma must have their diploma officially recognised before they can register.
 - **Ervaringscertificaat (EVC)** - gives a certificate of experience to justify experience from abroad.
-- **Uitvoeringsinstituut Werknemersverzekeringen (UWV)** helps people who are out of work or unable to work. We do this by providing benefits and by getting people back into work. We also support employers on all issues relating to employment.
+- **Uitvoeringsinstituut Werknemersverzekeringen (UWV)** helps people who are out of work or unable to work. They do this by providing benefits and by getting people back into work. They also support employers on all issues relating to employment.
 - When to contact UWV
 	- If one has worked 26 weeks in last 36 weeks and now unemployed, he goes to UWV and will receive **WW-uitkering** (*werkloosheidsuitkering*)
 	- If one is not suitable for work (*arbeidsongeschikt*) but was working will receive WIA/ZW-uitkering
@@ -68,8 +68,9 @@
 
 - When to contact gemeente
 	- If the person has not worked enough will receive *bijstandsuitkering*
-- **Toeslagen** - relief for various situations (huurtoeslag, zorgtoeslag, kinderopvangtoeslag, kindgebonden budget etc)
+- **Toeslagen** - relief for various situations (huurtoeslag, zorgtoeslag, kinderopvangtoeslag, kinderbijslag, kindgebonden budget)
 	- These can be requested in Belsatingdienst
+	- Kinderbijslag can be requested in SVB (sociale verzekeringsbank)
 - **Collectieve arbeidsovereenkomst (CAO)** - employment contract in a sector where they have their own agreement. Not everyone has CAO. A holiday is a day off only if it is in someone's CAO.
 - Contracts:
 	- **Vast contract** - fixed contract
@@ -286,7 +287,7 @@ Where to throw which trash:
 - **Scheepvaart** - shipping, sailing
 - **Slavernij** - slavery
 - **Watersnoodramp** - water disaster
-- **Zelfbeschikking** - self-determination
+- **Zelfbeschikkingrecht** - self-determination right
 # Knowledge
 
 - Goud eeuw - golden century of 17th (1600-1699)
@@ -329,3 +330,167 @@ Where to throw which trash:
 	- Euthasie
 - Dutch provinces 
 ![](https://dutchreview.com/wp-content/uploads/map-of-the-Netherlands-1.jpg)
+
+# Thema 6: Instanties
+## Words
+
+- **Aangifte** - declaration
+- **Inentingen** - vaccinations
+- **Verlijfsvergunning** - residence permit
+- **Voorwaarden** - conditions
+- **Strafblad** - criminal record
+- **Uittreksel** - copy of some personal data
+- **Salarisstrookje** - salary receipt
+- **Inkomstenbelasting** - income tax
+- **Voorlopige aanslag** - provisional tax assessment
+- **Sociale voorzieningen** - social services
+- **Overlast** - nuisance
+- **Ongevallen** - accidents
+- **Diefsteel** - theft
+- **Geweld** - violence
+- **Oplichting** - scam
+- **Klachten** - complains
+## Knowledge
+
+- Informatiepunt Digitale Overheid - information points in libraries for helping with stuff that are digital and govt-related
+- Nibud - National Instituted voor Budgetvoorlichting
+	- Helps with budgeting, money, savings
+	- Advises on debt
+- Schuldhulpverlening (debt assistance) from gemeente
+- Voedselbank - food bank
+	- Can be applied in gemeente or maatschappelijkwerk
+- GGD - gementelijke gezondheidsdienst
+	- Vaccinaties
+	- Seksuele gezondheid
+	- Testen op seksueel overdraagbare aandoeningen (soa) (STD)
+	- Vaccinaties voor reizen
+	- Gezondheidsadvies
+	- Jeugdgezondheidzorg (they lead consultatiebureau)
+		- So youth healthcare is in consultatiebureau
+- GGZ - geestelijke gezondheidszorg - mental health care
+- De maatschappelijk werker
+	- Via gemeente, wijkteam of wijkcentrum
+- Jeugdzorg (youth health)
+	- Jeugdteam of wijkteam via de gemeente
+	- Helps kids with behavioural issues, problems at home
+- IND - Immigratie en naturalisatiedienst
+	- Give residence permit and permanent residence permits
+- Three types of permits:
+	- Tijdelijke verblijfsvergunning: for study, work, family reunion (gezinshereniging)
+	- Permanente verblijfsvergunning - permanent residence
+	- Asielvergunning - asylum permit
+- Rijbewijs - driving license
+	- Given by gemeente
+	- Exams taken by CBR
+- Naturalitatie - naturalisation
+	- In Gemeente
+	- 5 year in NL
+	- Inburgeringexamen
+- Gemeente's roles
+	- Official documents (passports, id cards (not residence permits), uittereksel)
+	- Inschrijven in de Basisregistratie Personen (BRP)
+	- Help with work and income
+	- Housing offering and permits
+	- Support with care, wellbeing, youth care
+	- Maintenance of roads, parks, streets
+- Jaaropgave - yearly statement of income tax
+	- Must be kept for 5y as belastingdienst might need it
+- Income tax is used for
+	- Onderwijs
+	- Gezondheidszorg
+	- Politie en rechtspraak
+	- Overheid and sociale voorzieningen
+- Motorrijtuigenbelasting (motor vehicle tax) pays for roads and bridges
+- It's mandatory (verplichting) to report (aangifte) for
+	- Moord / doodslag (murder)
+	- Verkrachting (rape)
+	- Ontvoering (kidnapping)
+- Carrying id is mandatory from age 14 but 12 in OV
+- If mistreated by politie or overheid, go to
+	- Gemeentelijke en nationale ombudsman
+	- Advocaten en het juridisch loket
+	- Might need to pay a contribution based on income
+# Thema 7: Staatsinrichting and rechtstaat
+## Words
+
+- **Wetgevende macht** - legislative power (parliament)
+- **Uitvoerende macht** - executive power (minsters)
+- **Rechterlijke macht** - judicial power (judges)
+- **Eerwraak** - honour killing
+- **Huiselijk geweld** - domestic violence
+- **Besnijdenis** - circumcision
+- **Slaan van kinderen** - hitting kids
+
+## Knowledge
+
+- Kiesrecht 
+	- Actief kiesrecht - voting
+	- Passief kiesrecht - candidacy
+# Thema 8: Onderwijs and opvoeding
+## Words
+
+- **Opvoeding** - raising kids
+- **Overlegmomenten** - consultation moment in school with parents
+- **Leermiddelen** - teaching materials
+- Basisbeurs - basic grant
+- Aanvullende beurs - additional grant
+
+# Knowledge
+
+- Kinderopvang is a general place where you can bring your kids
+- Kinderdagverblijf is daycare
+	- 0-4y
+- Peuterspeelzal is for developing and making kids ready for school
+	- 2-4y
+	- Play, social skill development
+- Voorschoolse educatie is for kids whose parent don't speak Dutch
+	- Via consultatiebureau and gemeente
+	- 2.5-4y
+- Basisschool
+	- 4-12y
+	- Groep 1-8
+	- At the end CITO exam - gives indication for next level
+- Middelbare school
+	- VMBO - 4y
+	- HAVO - 5y
+	- VWO - 6y
+- From VMBO to MBO (4 levels in MBO 1-4)
+- From HAVO to HBO
+- From VWO to universiteit
+- At 14, students to choose their profiel
+	- Two directions: social/politics/economics & biology/science/math
+- Leerplict (mandatory education)
+	- From 5 to 16y
+	- From 16 to 18y, students have to qualify (kwalificatieplicht)
+	- Startkwalificatie - MBO niveau 2, havo or vwo diploma
+- Leerplichtambtenaar - in gemeente, checks if kids are in the school
+	- Cannot go on holiday if not holiday time
+	- Can get fines otherwise
+- Vrijheid van onderwijs
+	- School can choose how they teach
+	- Based on some govt terms
+	- Special schools like Islamic schools are allowed
+- Forms of education
+	- Montessori
+		- Focuses on independence
+		- Kids choose what they want to do
+	- Dalton
+		- Teachers don't lecture but coach
+		- Kids are independent, can choose
+	- Jenaplan
+		- Learn in a community
+		- Different ages
+	- Vrijschoolonderwijs
+		- Muziek, arts, nature story
+- Buitenschoolse opvang
+	- For kids 4-12y before and after school or in vacation
+	- Like childcare but for older kids
+- Kinderopvangtoeslag via Belastingdienst
+- In religious school still have to teach about sexuality and diversity
+	- But can fill it in according to the religion
+- Until 16y parents are responsible for their kids
+- Studiefinanciering/tegemoetkoming scholieren (student allowance) via DUO
+- Leergeldregeling - tuition fee scheme from Stichting Leergeld
+- Special help can be received from gemeente
+- Pestatiebeursregime - if you achieve your diploma, you don't have to pay everything back to DUO
+ 
