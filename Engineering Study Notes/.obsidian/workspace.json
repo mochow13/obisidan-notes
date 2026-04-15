@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Dutch/KNM Preparation.md",
+                "file": "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "KNM Preparation"
+              "title": "Midpoint Insertion Caching Strategy (MySQL InnoDB)"
             }
           }
         ]
@@ -183,14 +183,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "72d95b5a356a3f0d",
+  "active": "d961e957a62d1331",
   "lastOpenFiles": [
-    "Artificial Intelligence/Multimodal LLMs.md",
-    "Dutch/KNM Preparation.md",
-    "Miscellaneous/Various Configs.md",
-    "Screenshot 2026-02-14 at 19.04.48.png",
+    "Backend Engineering/Connection Pooling in Databases.md",
     "Miscellaneous/Useful Commands.md",
+    "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
+    "Backend Engineering/Database Load Management at Uber.md",
+    "Backend Engineering/Copy on Write (CoW).md",
+    "Artificial Intelligence/Multimodal LLMs.md",
+    "Backend Engineering/A Tale of Two Transactions.md",
+    "Screenshot 2026-03-14 at 18.37.47.png",
     "Miscellaneous/Claude Code - Best Practices.md",
+    "Miscellaneous/Various Configs.md",
+    "Dutch/KNM Preparation.md",
+    "Screenshot 2026-02-14 at 19.04.48.png",
     "Artificial Intelligence/Mixture of Experts.md",
     "Artificial Intelligence/Reasoning Models.md",
     "Artificial Intelligence/Reinforcement Learning with Verifiable Rewards.md",
@@ -212,7 +218,6 @@
     "Screenshot 2026-01-19 at 23.34.17.png",
     "Screenshot 2026-01-19 at 23.31.51.png",
     "Screenshot 2026-01-19 at 23.02.20.png",
-    "Screenshot 2026-01-19 at 22.59.34.png",
     "Dutch",
     "Backend Engineering/DynamoDB - resilience & lessons from the Oct 2025 service disruption.md",
     "Untitled.base",

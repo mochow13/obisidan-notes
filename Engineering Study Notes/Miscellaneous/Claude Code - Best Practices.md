@@ -13,7 +13,7 @@ Give Claude a way to verify its work.
 - This approach is suitable for complex tasks since it adds overhead
 ## Provide contexts
 
-- Provide specific contexts to Claude
+	- Provide specific contexts to Claude
 	- Specify which file, scenario, testing preferences
 	- Direct to specific part of the code
 	- Refer to existing patterns in the codebase

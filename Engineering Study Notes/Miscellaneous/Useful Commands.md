@@ -20,3 +20,9 @@ ssh http://app-staging.prod.booking.com/
 mysql -h<host> -u<user> -p (don't put password directly, it will be prompted)
 Example: mysql -hpartnershipnosoxmdb-vip.dbmaster.booking.com -uapp_bexreward_rw1 -p
 ```
+
+#### Reading Prod Database
+
+```
+mysqly -m rdbprod --fancy bexreward
+```

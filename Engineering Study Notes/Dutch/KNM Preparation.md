@@ -31,7 +31,7 @@
 
 - **Uitzendbureaus** - employment agencies
 - **Solicitatiegesprek** - job interview
-- **Arbeidsvoorwaarden** - working condition
+- **Arbeidsvoorwaarden** - working aggreement
 - **Arbeidsmarkt** - job market
 - **Vooropleiding** - preliminary education
 - **Beheersing** - Grasp, control
@@ -308,8 +308,8 @@ Where to throw which trash:
 	- 1836 people died
 	- 40k livestock, 140k chicken-birds died
 	- Water went up 4.5m higher than normal
-	- 20% of the country under sea
-	- 30% under 1m above
+		- 20% of the country under sea
+		- 30% under 1m above
 	- Dijken were not well-maintained because of war
 - Wilhelmus - national anthem
 - Tweede wereldoorlog
@@ -320,14 +320,14 @@ Where to throw which trash:
 	- 5th May - celebration (vieren)
 - After second world war, immigrants came
 	- To rebuild the country
-	- Netherlands made deals with Spain, Portugal, Turkiye, Morocco, Italy, Jugoslavia etc.
+	- Netherlands made deals with Spain, Portugal, Turkiye, Morocco, Italy, Yugoslavia etc.
 - Europese Unie (EU)
 - Noord-Atlantische Verdragsorganisatie (NAVO)
 - Verenigde Naties (VN)
 - Netherlands has rights for:
 	- Abortus
 	- Homohuwelijken
-	- Euthasie
+	- Euthanasie
 - Dutch provinces 
 ![](https://dutchreview.com/wp-content/uploads/map-of-the-Netherlands-1.jpg)
 
@@ -414,7 +414,7 @@ Where to throw which trash:
 ## Words
 
 - **Wetgevende macht** - legislative power (parliament)
-- **Uitvoerende macht** - executive power (minsters)
+- **Uitvoerende macht** - executive power (minstries)
 - **Rechterlijke macht** - judicial power (judges)
 - **Eerwraak** - honour killing
 - **Huiselijk geweld** - domestic violence
@@ -432,10 +432,10 @@ Where to throw which trash:
 - **Opvoeding** - raising kids
 - **Overlegmomenten** - consultation moment in school with parents
 - **Leermiddelen** - teaching materials
-- Basisbeurs - basic grant
-- Aanvullende beurs - additional grant
+- **Basisbeurs** - basic grant
+- **Aanvullende beurs** - additional grant
 
-# Knowledge
+## Knowledge
 
 - Kinderopvang is a general place where you can bring your kids
 - Kinderdagverblijf is daycare
