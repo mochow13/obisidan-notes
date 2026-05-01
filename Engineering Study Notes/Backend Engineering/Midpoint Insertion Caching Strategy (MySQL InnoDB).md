@@ -86,5 +86,4 @@ Default value:
 ## Main takeaway
 Midpoint insertion is a small change to strict LRU, but it solves a major practical issue: **sequential scans no longer trash the cache as badly**. It preserves hot pages better and keeps InnoDB performant under mixed workloads.
 
-## Tags
-#databases #mysql #innodb #caching #lru #system-design #performance
+tags: #databases #mysql #innodb #caching #lru #system-design #performance

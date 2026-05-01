@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
+                "file": "Artificial Intelligence/Inference Engineering Learning Plan by ChatGPT.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Midpoint Insertion Caching Strategy (MySQL InnoDB)"
+              "title": "Inference Engineering Learning Plan by ChatGPT"
             }
           }
         ]
@@ -183,11 +183,14 @@
       "bases:Create new base": false
     }
   },
-  "active": "d961e957a62d1331",
+  "active": "72d95b5a356a3f0d",
   "lastOpenFiles": [
+    "Backend Engineering/L4 Load Balancing.md",
+    "Artificial Intelligence/Inference Engineering Learning Plan by ChatGPT.md",
+    "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
+    "Backend Engineering/Distributed Transactions in DynamoDB.md",
     "Backend Engineering/Connection Pooling in Databases.md",
     "Miscellaneous/Useful Commands.md",
-    "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
     "Backend Engineering/Database Load Management at Uber.md",
     "Backend Engineering/Copy on Write (CoW).md",
     "Artificial Intelligence/Multimodal LLMs.md",
@@ -207,7 +210,6 @@
     "Backend Engineering/Bloom Filters.md",
     "Backend Engineering/Choosing the Correct Garbage Collector.md",
     "Screenshot 2026-02-02 at 23.05.21.png",
-    "Backend Engineering/Distributed Transactions in DynamoDB.md",
     "Backend Engineering/Deep Dive on Amazon S3.md",
     "Untitled.md",
     "Miscellaneous",
@@ -222,9 +224,7 @@
     "Backend Engineering/DynamoDB - resilience & lessons from the Oct 2025 service disruption.md",
     "Untitled.base",
     "Backend Engineering/Atlassian - Our not-so-magic journey scaling low latency, multi-region services on AWS.md",
-    "Backend Engineering/Atlassian - Here’s how one of Atlassian’s critical services consistently gets above 99.9999% of availability.md",
     "Artificial Intelligence",
-    "Backend Engineering",
-    "Welcome.md"
+    "Backend Engineering"
   ]
 }
