@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ca4671d9a79dd71f",
+        "id": "ae02d278f9f320d7",
         "type": "tabs",
         "children": [
           {
-            "id": "72d95b5a356a3f0d",
+            "id": "2acfad086e0ac22b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Artificial Intelligence/Inference Engineering/Inference Engineering — Kaggle Quickstart.md",
+                "file": "Artificial Intelligence/Inference Engineering/Inference Engineering — Local RTX 3060 Quickstart.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Inference Engineering — Kaggle Quickstart"
+              "title": "Inference Engineering — Local RTX 3060 Quickstart"
             }
           }
         ]
@@ -183,10 +183,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "72d95b5a356a3f0d",
+  "active": "2acfad086e0ac22b",
   "lastOpenFiles": [
-    "Artificial Intelligence/Inference Engineering/Inference Engineering — vLLM on Rented GPU.md",
+    "Artificial Intelligence/Inference Engineering/Inference Engineering — vLLM Local RTX 3060.md",
     "Artificial Intelligence/Inference Engineering/Inference Engineering Learning Plan by ChatGPT.md",
+    "Artificial Intelligence/Inference Engineering/Inference Engineering — Local RTX 3060 Quickstart.md",
+    "Artificial Intelligence/Inference Engineering/Prefill KV Cache Simulation with Multi-Head Attention.md",
+    "Artificial Intelligence/Inference Engineering/Inference Engineering — vLLM on Rented GPU.md",
     "Artificial Intelligence/Inference Engineering/Inference Engineering — Kaggle Quickstart.md",
     "Inference Engineering — vLLM on Rented GPU.md",
     "Artificial Intelligence/Inference Engineering",
@@ -211,10 +214,7 @@
     "Artificial Intelligence/LLM Inference Optimisations.md",
     "Artificial Intelligence/AI Agents from First Principles.md",
     "Artificial Intelligence/Context Engineering for AI Agents.md",
-    "Backend Engineering/Bloom Filters.md",
-    "Backend Engineering/Choosing the Correct Garbage Collector.md",
     "Screenshot 2026-02-02 at 23.05.21.png",
-    "Backend Engineering/Deep Dive on Amazon S3.md",
     "Miscellaneous",
     "Screenshot 2026-01-21 at 19.47.36.png",
     "Screenshot 2026-01-20 at 21.36.53.png",

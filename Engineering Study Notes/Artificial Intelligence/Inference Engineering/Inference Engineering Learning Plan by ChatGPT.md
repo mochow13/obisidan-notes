@@ -1,7 +1,7 @@
-# $20/Week Inference Engineering Plan
+# RTX 3060 Local Inference Engineering Plan
 
 > [!summary]
-> A practical 6-week plan to build real inference engineering experience on a budget using free and low-cost GPUs.
+> A practical 6-week plan to build real inference engineering experience on a local RTX 3060.
 > Emphasis is on **predict → measure → explain**, not just running benchmarks.
 
 ## Goal
@@ -15,48 +15,54 @@ Build hands-on skill in:
 - Profiling and bottleneck analysis (roofline, FlashAttention, tokenizer overhead)
 - Production-style model serving (cold starts, concurrency, autoscaling)
 
-## Budget
+## Local hardware
 
 > [!info]
-> **Target budget:** $12–20 per week
+> **Primary machine:** RTX 3060
 
-- **$0:** Kaggle (T4 16 GB, `transformers` only — vLLM won't install cleanly)
-- **$0–5:** Colab Free (only for tiny models, ≤3B)
-- **$10–12:** Vast.ai or Runpod burst sessions on a 24 GB GPU (vLLM works here)
-- **$3–5:** One Modal session
+Use the local GPU as the main learning platform instead of rented GPUs. This is enough for serious inference engineering practice if the model choices are realistic.
 
-> [!warning] Cost discipline
-> A 24 GB GPU on Runpod is roughly **$0.30–0.70/hr**. A single Week 4 quantization sweep (4 precisions × 3 batch sizes × warmup) easily eats 3–4 hours.
-> - **Shut instances down aggressively.** Set a timer.
-> - **Cache model weights to a persistent volume** so you don't re-download a 16 GB model every session.
-> - **Reuse a single benchmark harness** so every session produces comparable numbers.
+Practical target models:
+- **1.5B–3B models in FP16/BF16** for baseline serving and profiling
+- **7B/8B models in 4-bit quantization** for memory-pressure, KV-cache, and serving experiments
+- Use smaller models when an experiment is about methodology rather than raw model quality
 
-## Recommended providers
+Good local candidates:
+- `Qwen/Qwen2.5-1.5B-Instruct`
+- `Qwen/Qwen2.5-3B-Instruct`
+- `Qwen/Qwen2.5-7B-Instruct` with 4-bit quantization
+- `microsoft/Phi-3.5-mini-instruct`
 
-### Free
-- **Google Colab Free** (T4, 12–15 GB, only useful for ≤3B models)
-- **Kaggle Notebooks** (similar tier, longer sessions)
+> [!warning] RTX 3060 constraints
+> The RTX 3060 is usually **12 GB VRAM**. That is enough to learn the mechanics, but not enough for every 24 GB-GPU experiment as written.
+> - Expect smaller batch sizes and lower concurrency.
+> - Long-context tests may need shorter maximum sequence lengths.
+> - BF16/FP16 7B models may not fit comfortably; use 4-bit quantization.
+> - Track `nvidia-smi` memory carefully and record OOM limits as useful data, not failure.
 
-### Cheap bursty GPUs
-- **Runpod** (better availability for 24 GB cards)
-- **Vast.ai** (cheaper but flakier)
+## Optional cloud use
+
+Cloud GPUs are optional, not the default.
+
+Use rented 24 GB GPUs only if you specifically want to compare your local RTX 3060 results against a larger card, or if an experiment cannot fit locally. Keep the same benchmark harness so results stay comparable.
 
 ### Serverless deployment practice
-- **Modal**
+- **Modal** remains useful for Week 6 if you want production-style cold-start and autoscaling practice.
 
 ## Hardware target
 
 > [!tip]
-> Aim for a **24 GB GPU** (e.g. RTX 3090, 4090, A5000) whenever possible. This is the sweet spot for 7B/8B-class models with realistic batch sizes.
+> Treat the RTX 3060 as the target production constraint. The goal is to understand what fits, what breaks, and why.
 
 Good enough for:
-- vLLM with continuous batching
-- Quantized 7B/8B models at usable concurrency
-- KV-cache experiments at long context
-- Latency and throughput tuning
+- HF `transformers` local baselines
+- vLLM experiments with smaller models
+- Quantized 7B/8B model serving
+- KV-cache experiments at moderate context lengths
+- Latency, throughput, and memory tradeoff analysis
 
-> [!note] Out of scope (budget reasons)
-> Tensor parallelism / multi-GPU serving. Worth knowing the concept, but not worth renting two GPUs for. Mentioned in Week 5 as a thought experiment.
+> [!note] Out of scope
+> Tensor parallelism / multi-GPU serving. Worth knowing conceptually, but not needed for this local learning plan.
 
 ---
 
@@ -66,8 +72,10 @@ Good enough for:
 > Most learners skip this and pay for it every week after.
 
 ### Tasks
-- [ ] Create a Runpod / Vast.ai persistent volume for model weights
-- [ ] Pick **one** model to use for the whole 6 weeks (e.g. `meta-llama/Llama-3.1-8B-Instruct` or `Qwen2.5-7B-Instruct`)
+- [ ] Set up a local Python environment with CUDA-enabled PyTorch
+- [ ] Create a local model cache directory with enough disk space for repeated experiments
+- [ ] Pick **one small baseline model** for the whole 6 weeks, e.g. `Qwen/Qwen2.5-1.5B-Instruct` or `Qwen/Qwen2.5-3B-Instruct`
+- [ ] Pick **one stretch model** for quantized tests, e.g. `Qwen/Qwen2.5-7B-Instruct` in 4-bit
 - [ ] Build a minimal **benchmark harness** in a single repo:
   - [ ] `bench.py` — sends N concurrent requests, records TTFT, ITL, total latency, throughput
   - [ ] `results/` — one CSV/JSON per experiment, with metadata (model, dtype, batch, prompt len)
@@ -81,12 +89,12 @@ Good enough for:
 
 ## Weekly plan
 
-## Week 1 — Basic local serving (Kaggle, free)
+## Week 1 — Basic local serving on RTX 3060
 
-> [!tip] Hands-on notebook
-> [[Inference Engineering — Kaggle Quickstart]] — ready-to-run cells for everything below.
+> [!tip] Hands-on local script
+> [[Inference Engineering — Local RTX 3060 Quickstart]] contains the local RTX 3060 terminal workflow for Week 1.
 
-**Platform:** Kaggle (T4 16 GB, `transformers` only). vLLM does not work on Kaggle (Python 3.12 + FlashInfer + NCCL incompatibilities).
+**Platform:** Local RTX 3060 with HF `transformers`.
 
 ### Prediction (write before running)
 - What TTFT do you expect for a 256-token prompt on a 1.5B model in FP16?
@@ -112,12 +120,12 @@ Understand:
 
 ---
 
-## Week 2 — vLLM, batching, and scheduling (rented GPU)
+## Week 2 — vLLM, batching, and scheduling on RTX 3060
 
-> [!tip] Hands-on notebook
-> [[Inference Engineering — vLLM on Rented GPU]] — first vLLM contact + concurrency sweep.
+> [!tip] Hands-on local script
+> [[Inference Engineering — vLLM Local RTX 3060]] contains the terminal workflow for local vLLM serving, concurrency sweeps, and static-vs-continuous batching.
 
-**Platform:** Vast.ai / Runpod, 24 GB GPU (RTX 3090 ~$0.22/hr)
+**Platform:** Local RTX 3060
 **Target time:** 2–4 hours
 
 ### Prediction
@@ -131,8 +139,8 @@ Understand:
   - [ ] HF `generate` in a naive loop (static / no batching) — reuse your Week 1 code
   - [ ] vLLM server (continuous batching)
   - [ ] Plot throughput vs concurrency for both
-- [ ] Run 1, 2, 4, 8, 16 concurrent requests on vLLM
-- [ ] Test short prompts (~50 tok) vs long prompts (~2000 tok)
+- [ ] Run 1, 2, 4, 8 concurrent requests on vLLM; try 16 only if memory allows
+- [ ] Test short prompts (~50 tok) vs medium/long prompts (~512–2000 tok, depending on VRAM)
 - [ ] Measure TTFT, throughput, P50/P95 latency
 
 ### Goal
@@ -152,9 +160,9 @@ Learn:
 ## Week 3 — KV cache and context length
 
 > [!tip] Starter data
-> The prompt-length sweep from [[Inference Engineering — Kaggle Quickstart#Cell 5 — Prompt-length sweep (seeds Week 3)]] gives you initial TTFT-vs-length numbers. This week goes deeper with KV-cache math and prefix caching.
+> The prompt-length sweep from [[Inference Engineering — Local RTX 3060 Quickstart#4. Run the baseline]] gives you initial TTFT-vs-length numbers. This week goes deeper with KV-cache math and prefix caching.
 
-**Platform:** Cheap 24 GB GPU session
+**Platform:** Local RTX 3060
 
 ### Prediction (do the math first)
 Compute expected KV-cache size analytically:
@@ -167,7 +175,7 @@ kv_bytes = 2 * n_layers * n_kv_heads * head_dim * seq_len * dtype_bytes * batch_
 - At seq_len = 32k?
 
 ### Tasks
-- [ ] Vary prompt length: 512, 2k, 8k, 32k tokens
+- [ ] Vary prompt length: 512, 2k, 4k, 8k tokens; try higher only if the model and VRAM allow it
 - [ ] **Measure** KV-cache memory and compare to your analytical prediction
 - [ ] Explain any delta (paged allocation overhead, GQA, dtype)
 - [ ] Compare prefill time vs decode time as context grows
@@ -188,14 +196,15 @@ Develop intuition for:
 
 ## Week 4 — Quantization
 
-**Platform:** Runpod or Vast.ai
+**Platform:** Local RTX 3060
 
 ### Prediction
 - BF16 → 4-bit AWQ: expect what % VRAM reduction? What % throughput change? What quality drop?
 
 ### Tasks
-- [ ] Compare at minimum: **BF16, bitsandbytes 8-bit, bitsandbytes 4-bit (NF4), AWQ 4-bit, GPTQ 4-bit**
+- [ ] Compare what fits locally: **FP16/BF16 if it fits, bitsandbytes 8-bit, bitsandbytes 4-bit (NF4), AWQ 4-bit, GPTQ 4-bit**
   - bnb is convenient but production serving usually uses AWQ/GPTQ; the difference matters
+  - If a precision does not fit in 12 GB VRAM, record that explicitly as part of the result
 - [ ] Use a **fixed eval set**: 50 prompts (MMLU-style, or curated from your domain)
 - [ ] **Deterministic decode**: `temperature=0`, fixed `max_tokens`
 - [ ] Record per precision:
@@ -214,7 +223,7 @@ Learn practical tradeoffs between speed, memory, and accuracy — and which quan
 
 ## Week 5 — Profiling
 
-**Platform:** Cheap rented 24 GB GPU (Colab Free profiler is unreliable)
+**Platform:** Local RTX 3060
 
 ### Prediction (this is the whole exercise)
 - For decode at batch = 1: do you expect compute-bound or memory-bandwidth-bound? Why?
@@ -283,7 +292,7 @@ Learn:
 - **vLLM** (and its scheduler internals — read the paged attention paper)
 - **bitsandbytes**, **AWQ**, **GPTQ**
 - **FlashAttention**
-- **Runpod** or **Vast.ai**
+- Local CUDA tooling: `nvidia-smi`, PyTorch profiler, Nsight Systems/Compute if available
 - **Modal**
 - A simple load-testing tool:
   - **hey**
@@ -336,14 +345,14 @@ Your repo should clearly show:
 
 ---
 
-## Example weekly spend
+## Expected spend
 
-- [ ] 2 sessions on Vast.ai or Runpod: **$4–6 each**
-- [ ] 1 small Modal experiment: **$2–4 effective spend**
-- [ ] Everything else on free Colab (capped to ≤3B models)
+- [ ] Local RTX 3060 experiments: **$0 cloud spend**
+- [ ] Optional Modal experiment in Week 6: **small usage-based cost**
+- [ ] Optional rented 24 GB comparison session: only if you want larger-GPU comparison numbers
 
 > [!success]
-> Total expected spend: **$12–20/week**
+> Total expected spend: **$0/week for the core plan**
 
 ---
 

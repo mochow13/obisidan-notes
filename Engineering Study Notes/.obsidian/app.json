@@ -5,5 +5,6 @@
   "readableLineLength": true,
   "livePreview": true,
   "defaultViewMode": "source",
-  "spellcheck": true
+  "spellcheck": true,
+  "alwaysUpdateLinks": true
 }
