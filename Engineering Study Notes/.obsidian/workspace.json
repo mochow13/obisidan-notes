@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Artificial Intelligence/Inference Engineering/Inference Engineering Learning Plan by ChatGPT.md",
+                "file": "Miscellaneous/Claude Code - Best Practices.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Inference Engineering Learning Plan by ChatGPT"
+              "title": "Claude Code - Best Practices"
             }
           }
         ]
@@ -185,8 +185,13 @@
   },
   "active": "72d95b5a356a3f0d",
   "lastOpenFiles": [
-    "Artificial Intelligence/Inference Engineering/Inference Engineering — Learning Plan by ChatGPT.md",
+    "Miscellaneous/Useful Commands.md",
+    "Miscellaneous/Various Configs.md",
+    "Miscellaneous/Claude Code - Best Practices.md",
+    "Programming Languages/Go Concurrency - `sync.Map`, `Mutex`, and `RWMutex`.md",
     "Artificial Intelligence/Inference Engineering/Inference Engineering Learning Plan by ChatGPT.md",
+    "Programming Languages",
+    "Artificial Intelligence/Inference Engineering/Inference Engineering — Learning Plan by ChatGPT.md",
     "Artificial Intelligence/Inference Engineering/Inference Engineering — vLLM Local RTX 3060.md",
     "Artificial Intelligence/Inference Engineering/Inference Engineering — Local RTX 3060 Quickstart.md",
     "Backend Engineering/Deep Dive into AWS Aurora.md",
@@ -201,19 +206,14 @@
     "Backend Engineering/Midpoint Insertion Caching Strategy (MySQL InnoDB).md",
     "Backend Engineering/Distributed Transactions in DynamoDB.md",
     "Backend Engineering/Connection Pooling in Databases.md",
-    "Miscellaneous/Useful Commands.md",
     "Artificial Intelligence/Multimodal LLMs.md",
     "Backend Engineering/A Tale of Two Transactions.md",
     "Screenshot 2026-03-14 at 18.37.47.png",
-    "Miscellaneous/Claude Code - Best Practices.md",
-    "Miscellaneous/Various Configs.md",
     "Dutch/KNM Preparation.md",
     "Screenshot 2026-02-14 at 19.04.48.png",
     "Artificial Intelligence/Mixture of Experts.md",
     "Artificial Intelligence/Reasoning Models.md",
     "Artificial Intelligence/Reinforcement Learning with Verifiable Rewards.md",
-    "Artificial Intelligence/The Big LLM Architecture Comparison.md",
-    "Artificial Intelligence/LLM Inference Optimisations.md",
     "Screenshot 2026-02-02 at 23.05.21.png",
     "Miscellaneous",
     "Screenshot 2026-01-21 at 19.47.36.png",
