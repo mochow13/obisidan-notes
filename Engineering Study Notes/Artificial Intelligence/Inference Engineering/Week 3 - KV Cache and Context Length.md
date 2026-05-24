@@ -1,4 +1,3 @@
-# Week 3 — KV Cache and Context Length on Local RTX 3060
 
 > [!summary]
 > Week 3 local GPU guide for [[Inference Engineering Learning Plan by ChatGPT#Week 3 — KV cache and context length|Week 3 of the master plan]]. Measure KV-cache growth, prefill latency, decode latency, and vLLM prefix caching on a local RTX 3060 with **6 GiB VRAM**.

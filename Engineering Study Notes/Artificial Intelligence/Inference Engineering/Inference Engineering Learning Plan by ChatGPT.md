@@ -92,7 +92,7 @@ Good enough for:
 ## Week 1 — Basic local serving on RTX 3060
 
 > [!tip] Hands-on local script
-> [[Inference Engineering — Local RTX 3060 Quickstart]] contains the local RTX 3060 terminal workflow for Week 1.
+> [[Week 1 — Inference Engineering on Local RTX 3060]] contains the local RTX 3060 terminal workflow for Week 1.
 
 **Platform:** Local RTX 3060 with HF `transformers`.
 
@@ -160,7 +160,7 @@ Learn:
 ## Week 3 — KV cache and context length
 
 > [!tip] Starter data
-> The prompt-length sweep from [[Inference Engineering — Local RTX 3060 Quickstart#4. Run the baseline]] gives you initial TTFT-vs-length numbers. This week goes deeper with KV-cache math and prefix caching.
+> The prompt-length sweep from [[Week 1 — Inference Engineering on Local RTX 3060#4. Run the baseline]] gives you initial TTFT-vs-length numbers. This week goes deeper with KV-cache math and prefix caching.
 
 **Platform:** Local RTX 3060
 
