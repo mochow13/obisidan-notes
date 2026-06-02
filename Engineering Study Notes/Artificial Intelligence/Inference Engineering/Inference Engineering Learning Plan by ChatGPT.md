@@ -202,12 +202,12 @@ Develop intuition for:
 - BF16 → 4-bit AWQ: expect what % VRAM reduction? What % throughput change? What quality drop?
 
 ### Tasks
-- [ ] Compare what fits locally: **FP16/BF16 if it fits, bitsandbytes 8-bit, bitsandbytes 4-bit (NF4), AWQ 4-bit, GPTQ 4-bit**
+- [x] Compare what fits locally: **FP16/BF16 if it fits, bitsandbytes 8-bit, bitsandbytes 4-bit (NF4), AWQ 4-bit, GPTQ 4-bit**
   - bnb is convenient but production serving usually uses AWQ/GPTQ; the difference matters
   - If a precision does not fit in 12 GB VRAM, record that explicitly as part of the result
-- [ ] Use a **fixed eval set**: 50 prompts (MMLU-style, or curated from your domain)
-- [ ] **Deterministic decode**: `temperature=0`, fixed `max_tokens`
-- [ ] Record per precision:
+- [x] Use a **fixed eval set**: 50 prompts (MMLU-style, or curated from your domain)
+- [x] **Deterministic decode**: `temperature=0`, fixed `max_tokens`
+- [x] Record per precision:
   - [ ] VRAM (steady state)
   - [ ] Throughput at concurrency 1 and 8
   - [ ] Exact-match or rubric score on the eval set (not vibes)

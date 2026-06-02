@@ -467,6 +467,19 @@ python week4_transformers_quant_eval.py \
   --precision bnb4
 ```
 
+### Results: Qwen2.5-0.5B-Instruct
+
+| Precision | Accuracy | Steady VRAM | Peak VRAM | Throughput | Load time |
+|---|---|---:|---:|---:|---:|
+| **FP16** | 56% (28/50) | 950 MiB | 965 MiB | **10.3 tok/s** | 11.8 s |
+| **bnb 8-bit** | 54% (27/50) | 602 MiB | 621 MiB | **2.3 tok/s** | 10.4 s |
+| **bnb 4-bit NF4** | 60% (30/50) | 436 MiB | 467 MiB | **4.0 tok/s** | 9.8 s |
+
+**What this means:**
+- VRAM shrank predictably with precision (FP16 > 8-bit > 4-bit).
+- **Speed went opposite of what many expect:** FP16 was the fastest. On this consumer GPU, bnb dequantization/kernel overhead outweighed any memory-bandwidth savings.
+- Eval scores are low (54–60%) and noisy. The 0.5B model shows a strong "A" bias (predicted "A" for 31–35 of 50 questions regardless of the correct answer), so differences between precisions are likely noise rather than real quantization degradation.
+
 Then try the 1.5B model:
 
 ```bash
@@ -492,6 +505,21 @@ If one fails, record:
 
 > [!note]
 > `torch.cuda.memory_allocated()` is useful for consistent PyTorch comparisons, but it is not the same as total process memory in `nvidia-smi`. `nvidia-smi` includes CUDA context, allocator reservations, kernels, and sometimes non-PyTorch allocations.
+
+### Results: Qwen2.5-1.5B-Instruct
+
+| Precision | Accuracy | Steady VRAM | Peak VRAM | Throughput | Load time |
+|---|---|---:|---:|---:|---:|
+| **FP16** | 92% (46/50) | 2,945 MiB | 2,966 MiB | **9.67 tok/s** | 29.6 s |
+| **bnb 8-bit** | 94% (47/50) | 1,702 MiB | 1,737 MiB | **2.47 tok/s** | 16.9 s |
+| **bnb 4-bit NF4** | 90% (45/50) | 1,100 MiB | 1,171 MiB | **4.69 tok/s** | 9.6 s |
+
+**What this means:**
+- All three configurations fit comfortably in 6 GiB VRAM.
+- VRAM scaled predictably: 8-bit saved ~42% vs FP16; 4-bit saved ~63%.
+- **Speed pattern is the same as 0.5B:** FP16 was fastest; both bnb variants were slower due to dequantization/kernel overhead.
+- Accuracy is now a clean, meaningful signal (~90–94%). The same three questions were wrong across **all** precisions (q001, q004, q011), which means those are model limitations, not quantization damage.
+- bnb 4-bit produced slightly longer outputs on a few questions (e.g., it sometimes appended a short explanation after the answer letter), but answer extraction still worked.
 
 ---
 
