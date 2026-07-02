@@ -1,13 +1,4 @@
----
-tags:
-  - machine-learning
-  - architecture
-  - large-language-models
-  - stanford-cs336
-aliases:
-  - Attention Alternatives
-  - Mixture of Experts
----
+
 > [!abstract] Overview
 > This note summarizes advanced architectural modifications to the standard Transformer. The primary goals are to handle massive context windows by mitigating the quadratic cost of self-attention, and to dramatically scale up parameter counts without increasing compute costs per token.
 
