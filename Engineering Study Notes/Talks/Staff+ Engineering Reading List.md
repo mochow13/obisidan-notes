@@ -7,8 +7,8 @@
 
 ## Distributed systems, coordination & consistency
 
-- [ ] [Challenges with distributed systems](https://aws.amazon.com/builders-library/challenges-with-distributed-systems/)
-- [ ] [Leader election in distributed systems](https://aws.amazon.com/builders-library/leader-election-in-distributed-systems/)
+- [x] [Challenges with distributed systems](https://aws.amazon.com/builders-library/challenges-with-distributed-systems/)
+- [x] [Leader election in distributed systems](https://aws.amazon.com/builders-library/leader-election-in-distributed-systems/)
 - [ ] [Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
 - [ ] [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
 - [ ] [Building and deploying MySQL Raft at Meta](https://engineering.fb.com/2023/05/16/data-infrastructure/mysql-raft-meta/)
