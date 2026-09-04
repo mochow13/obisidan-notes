@@ -9,8 +9,8 @@
 
 - [x] [Challenges with distributed systems](https://aws.amazon.com/builders-library/challenges-with-distributed-systems/)
 - [x] [Leader election in distributed systems](https://aws.amazon.com/builders-library/leader-election-in-distributed-systems/)
-- [ ] [Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
-- [ ] [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+- [x] [Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
+- [x] [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
 - [ ] [Building and deploying MySQL Raft at Meta](https://engineering.fb.com/2023/05/16/data-infrastructure/mysql-raft-meta/)
 - [ ] [Versioning versus Coordination](https://brooker.co.za/blog/2025/02/04/versioning.html)
 - [ ] [Why Strong Consistency?](https://brooker.co.za/blog/2025/11/18/consistency.html)
