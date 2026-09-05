@@ -23,6 +23,131 @@ status: evergreen
 > **What semantics does the application need, where should those semantics live, what state does the choice create, and how does the system behave when the network becomes slow, lossy, partitioned, or overloaded?**
 
 ---
+- [[#Executive summary|Executive summary]]
+- [[#3.1 The latency equation|3.1 The latency equation]]
+- [[#3.2 Propagation cannot be optimized away|3.2 Propagation cannot be optimized away]]
+- [[#5.1 Addresses are topological identifiers|5.1 Addresses are topological identifiers]]
+- [[#5.2 Private addresses and NAT|5.2 Private addresses and NAT]]
+- [[#5.3 The 5-tuple|5.3 The 5-tuple]]
+- [[#5.4 IPv6 changes addressing more than architecture|5.4 IPv6 changes addressing more than architecture]]
+- [[#6.1 Internet routing|6.1 Internet routing]]
+- [[#6.2 Anycast|6.2 Anycast]]
+- [[#7.1 Why application engineers should care|7.1 Why application engineers should care]]
+- [[#8.1 TTL is a cache lifetime, not a deployment deadline|8.1 TTL is a cache lifetime, not a deployment deadline]]
+- [[#8.2 Negative caching|8.2 Negative caching]]
+- [[#8.3 DNS-based traffic steering|8.3 DNS-based traffic steering]]
+- [[#8.4 DNS vs service discovery|8.4 DNS vs service discovery]]
+	- [[#8.4 DNS vs service discovery#Smart clients|Smart clients]]
+	- [[#8.4 DNS vs service discovery#Smart proxies|Smart proxies]]
+- [[#9.1 “UDP is faster” is the wrong model|9.1 “UDP is faster” is the wrong model]]
+- [[#10.1 Sequence numbers and retransmission|10.1 Sequence numbers and retransmission]]
+- [[#11.1 Flow control|11.1 Flow control]]
+- [[#11.2 Congestion control|11.2 Congestion control]]
+- [[#19.1 Why QUIC exists|19.1 Why QUIC exists]]
+- [[#19.2 Connection IDs and migration|19.2 Connection IDs and migration]]
+- [[#19.3 Why QUIC uses UDP|19.3 Why QUIC uses UDP]]
+- [[#20.1 TLS does not authenticate application claims|20.1 TLS does not authenticate application claims]]
+- [[#20.2 TLS termination defines a trust boundary|20.2 TLS termination defines a trust boundary]]
+- [[#20.3 mTLS|20.3 mTLS]]
+- [[#20.4 TLS 1.3 and 0-RTT|20.4 TLS 1.3 and 0-RTT]]
+- [[#21.1 HTTP/1.1|21.1 HTTP/1.1]]
+- [[#21.2 HTTP/2|21.2 HTTP/2]]
+- [[#21.3 HTTP/3|21.3 HTTP/3]]
+- [[#21.4 Version negotiation and coexistence|21.4 Version negotiation]]
+- [[#21.5 Comparison at a glance|21.5 Comparison]]
+- [[#21.6 Staff+ heuristic|21.6 Staff+ heuristic]]
+- [[#23.1 REST|23.1 REST]]
+- [[#23.2 GraphQL|23.2 GraphQL]]
+- [[#24.1 gRPC channels are long-lived|24.1 gRPC channels are long-lived]]
+- [[#24.2 Deadlines are part of the RPC contract|24.2 Deadlines are part of the RPC contract]]
+- [[#26.1 Event IDs are not durable delivery by themselves|26.1 Event IDs are not durable delivery by themselves]]
+- [[#26.2 Operational gotchas and networking constraints|26.2 Operational gotchas and networking constraints]]
+- [[#27.1 The real cost is state|27.1 The real cost is state]]
+- [[#27.2 Distributed routing and horizontal fanout|27.2 Distributed routing and horizontal fanout]]
+- [[#32.1 STUN|32.1 STUN]]
+- [[#32.2 TURN|32.2 TURN]]
+- [[#Client-side|Client-side]]
+	- [[#Client-side#Benefits|Benefits]]
+	- [[#Client-side#Costs|Costs]]
+- [[#Proxy-based|Proxy-based]]
+	- [[#Proxy-based#Benefits|Benefits]]
+	- [[#Proxy-based#Costs|Costs]]
+- [[#L4|L4]]
+- [[#L7|L7]]
+- [[#Round robin|Round robin]]
+- [[#Least connections / least requests|Least connections / least requests]]
+- [[#Random / power-of-two choices|Random / power-of-two choices]]
+- [[#Consistent hashing|Consistent hashing]]
+- [[#39.1 Liveness vs readiness|39.1 Liveness vs readiness]]
+	- [[#39.1 Liveness vs readiness#Liveness|Liveness]]
+	- [[#39.1 Liveness vs readiness#Readiness|Readiness]]
+- [[#39.2 Passive health signals|39.2 Passive health signals]]
+- [[#41.1 Cacheability is a consistency decision|41.1 Cacheability is a consistency decision]]
+- [[#43.1 The hard part: movement|43.1 The hard part: movement]]
+- [[#46.1 Connect timeout vs request timeout|46.1 Connect timeout vs request timeout]]
+	- [[#46.1 Connect timeout vs request timeout#Closed|Closed]]
+	- [[#46.1 Connect timeout vs request timeout#Open|Open]]
+	- [[#46.1 Connect timeout vs request timeout#Half-open|Half-open]]
+- [[#51.1 Circuit breakers are admission control|51.1 Circuit breakers are admission control]]
+	- [[#51.1 Circuit breakers are admission control#Preserve availability|Preserve availability]]
+	- [[#51.1 Circuit breakers are admission control#Preserve strong consistency|Preserve strong consistency]]
+- [[#Client / edge|Client / edge]]
+- [[#Proxy / load balancer|Proxy / load balancer]]
+- [[#Service|Service]]
+- [[#Host/network|Host/network]]
+	- [[#Host/network#1. Naming|1. Naming]]
+	- [[#Host/network#2. Routing|2. Routing]]
+	- [[#Host/network#3. Transport|3. Transport]]
+	- [[#Host/network#4. TLS|4. TLS]]
+	- [[#Host/network#5. Proxy|5. Proxy]]
+	- [[#Host/network#6. Application|6. Application]]
+	- [[#Host/network#7. Dependency|7. Dependency]]
+- [[#63.1 Do not blindly trust forwarded client IP headers|63.1 Do not blindly trust forwarded client IP headers]]
+- [[#63.2 Network location is weak identity|63.2 Network location is weak identity]]
+- [[#Failure: retrying at every layer|Failure: retrying at every layer]]
+- [[#Failure: infinite or huge timeouts|Failure: infinite or huge timeouts]]
+- [[#Failure: storing session ownership only on a WebSocket host|Failure: storing session ownership only on a WebSocket host]]
+- [[#Failure: sticky sessions as a shortcut for state architecture|Failure: sticky sessions as a shortcut for state architecture]]
+- [[#Failure: instant full traffic to cold replicas|Failure: instant full traffic to cold replicas]]
+- [[#Failure: connection pools with no bounds|Failure: connection pools with no bounds]]
+- [[#Failure: queues with no bounds|Failure: queues with no bounds]]
+- [[#Failure: DNS used as sub-second health routing|Failure: DNS used as sub-second health routing]]
+- [[#Failure: cross-region synchronous chatter|Failure: cross-region synchronous chatter]]
+- [[#Communication shape|Communication shape]]
+- [[#Delivery requirement|Delivery requirement]]
+- [[#Connection lifetime|Connection lifetime]]
+- [[#Scale dimension|Scale dimension]]
+- [[#Client environment|Client environment]]
+- [[#Failure semantics|Failure semantics]]
+	- [[#Failure semantics#WebSocket transport|WebSocket transport]]
+	- [[#Failure semantics#Durable message service|Durable message service]]
+	- [[#Failure semantics#Fanout system|Fanout system]]
+- [[#Traffic and topology|Traffic and topology]]
+- [[#Connection model|Connection model]]
+- [[#Protocol semantics|Protocol semantics]]
+- [[#Reliability|Reliability]]
+- [[#Overload|Overload]]
+- [[#Load balancing|Load balancing]]
+- [[#Security|Security]]
+- [[#Operability|Operability]]
+	- [[#Operability#Public synchronous APIs|Public synchronous APIs]]
+	- [[#Operability#Internal RPC|Internal RPC]]
+	- [[#Operability#Server → browser streaming|Server → browser streaming]]
+	- [[#Operability#Bidirectional browser messaging|Bidirectional browser messaging]]
+	- [[#Operability#Interactive media|Interactive media]]
+	- [[#Operability#Global read-heavy data|Global read-heavy data]]
+	- [[#Operability#Internal reliability|Internal reliability]]
+- [[#Exercise 1 — inspect a real request|Exercise 1 — inspect a real request]]
+- [[#Exercise 2 — induce packet loss|Exercise 2 — induce packet loss]]
+- [[#Exercise 3 — break MTU|Exercise 3 — break MTU]]
+- [[#Exercise 4 — create retry amplification|Exercise 4 — create retry amplification]]
+- [[#Exercise 5 — persistent connection deployment|Exercise 5 — persistent connection deployment]]
+- [[#Baseline source|Baseline source]]
+- [[#Primary protocol references|Primary protocol references]]
+- [[#Production-oriented references|Production-oriented references]]
+	- [[#Production-oriented references#gRPC documentation|gRPC documentation]]
+	- [[#Production-oriented references#Amazon Builders' Library|Amazon Builders' Library]]
+	- [[#Production-oriented references#Envoy documentation|Envoy documentation]]
 
 ## Executive summary
 
@@ -363,7 +488,9 @@ Example:
 10.20.16.0/20
 ```
 
-`/20` means the first 20 bits identify the network prefix.
+`/20` means the first 20 of IPv4's 32 bits are the fixed network prefix; the remaining 12 bits identify addresses within that block. It corresponds to the mask `255.255.240.0` and contains $2^{12} = 4096$ addresses: `10.20.16.0` through `10.20.31.255`.
+
+In general, an IPv4 CIDR block `a.b.c.d/n` contains $2^{32-n}$ addresses. A larger prefix length is a smaller, more specific block: `/24` contains 256 addresses, while `/16` contains 65,536. Routers select the most specific matching route (the **longest-prefix match**), which lets a subnet such as `10.20.16.0/20` override a broader `10.20.0.0/16` route.
 
 CIDR gives architects a hierarchy useful for:
 
@@ -377,23 +504,33 @@ CIDR gives architects a hierarchy useful for:
 
 ## 5.2 Private addresses and NAT
 
-IPv4 private ranges commonly used internally come from RFC 1918.
+IPv4 private ranges commonly used internally come from RFC 1918:
 
-Private addresses are not globally routed on the public Internet.
+- `10.0.0.0/8`
+- `172.16.0.0/12`
+- `192.168.0.0/16`
 
-A NAT device can translate:
+Private addresses are not globally routed on the public Internet. For example, many unrelated home or company networks can use `10.0.2.15`, so a public website cannot use that address to identify or return traffic to one particular machine.
+
+A **Network Address Translation (NAT)** gateway solves this for outbound connections. It has a public, Internet-routable address and rewrites the source address and usually the source port of packets leaving the private network.
+
+For example, a laptop may initiate a connection as:
 
 ```text
-10.0.2.15:49152
+Laptop:       10.0.2.15:49152
+NAT gateway:  203.0.113.8:62001
+Website sees: 203.0.113.8:62001
 ```
 
-to something like:
+The gateway creates a temporary mapping:
 
 ```text
-203.0.113.8:62001
+10.0.2.15:49152  ↔  203.0.113.8:62001  (TCP)
 ```
 
-The NAT therefore creates state roughly representing:
+When the website replies to `203.0.113.8:62001`, the gateway looks up the mapping, changes the destination back to `10.0.2.15:49152`, and forwards the packet to the laptop. Multiple internal machines can share one public IP because the gateway assigns distinct external ports to their connections.
+
+The NAT therefore keeps state roughly representing:
 
 ```text
 internal IP
@@ -403,13 +540,15 @@ external port
 protocol
 ```
 
+This also explains why unsolicited inbound traffic normally fails: without an existing mapping, the NAT does not know which internal device should receive a packet. Port forwarding creates an explicit, usually long-lived mapping for an inbound port, such as sending public port `443` to an internal web server.
+
 This introduces an important operational resource:
 
 > **NAT mappings are finite state.**
 
-A system with extremely high outbound connection churn can exhaust available mappings or ephemeral source ports.
+A system with extremely high outbound connection churn can exhaust available mappings or ephemeral source ports. Connections then fail even if the application servers and Internet link appear healthy.
 
-This is one reason connection pooling matters beyond latency.
+This is one reason connection pooling matters beyond latency: reusing a small number of established connections consumes fewer NAT mappings and source ports.
 
 ---
 
@@ -467,50 +606,56 @@ Staff+ engineers should understand the abstraction boundary because global syste
 
 ## 6.1 Internet routing
 
-The Internet consists of many independently operated **Autonomous Systems (ASes)**.
+The Internet is not one centrally managed network. It is a collection of independently operated networks called **Autonomous Systems (ASes)**. An AS may be an ISP, cloud provider, large company, university, or content-delivery network. Each AS controls its own routers and decides which other networks it connects to.
 
-BGP distributes reachability information between them.
-
-A simplified model:
+For example, imagine a service owns the IP range `203.0.113.0/24`. Its network—**AS X**—tells its directly connected neighbors: “I can deliver traffic for this range.” This is called advertising a **prefix**. (`/24` means all addresses from `203.0.113.0` through `203.0.113.255`.)
 
 ```text
-Prefix 203.0.113.0/24
-        ↓ advertised by
-Autonomous System X
-        ↓
+Service IP: 203.0.113.42
+belongs to prefix: 203.0.113.0/24
+
+AS X: "send 203.0.113.0/24 traffic to me"
+        ↓ advertises to
 Neighboring ASes
-        ↓
-Internet routing tables
+        ↓ may re-advertise to
+Other ASes across the Internet
 ```
 
-BGP is policy-driven routing, not simply “shortest physical path.”
+**BGP (Border Gateway Protocol)** is the protocol ASes use to exchange these reachability advertisements. An advertisement effectively says: “for this IP prefix, I know a route through these networks.” It does not tell every router the exact physical cable-by-cable route to a single server; routers use the prefix information to choose the next network hop.
+
+When your laptop sends a packet to `203.0.113.42`, each router forwards it toward a network that has advertised a route for the most-specific matching prefix. Eventually the packet reaches AS X, whose internal routing delivers it to the service.
+
+BGP is **policy-driven**, not simply “choose the physically shortest path.” Networks choose routes based on business relationships, cost, capacity, security rules, reliability, and sometimes path length. For example, an ISP may prefer a route through a paid transit provider over a direct-looking route that it is not permitted to use.
 
 Therefore:
 
 - packets can take unintuitive routes;
-- network path changes can alter latency;
-- routing incidents can affect seemingly unrelated customers;
+- the forward and return paths may differ;
+- a route change can alter latency without any application deployment;
+- a routing incident or mistaken advertisement can affect seemingly unrelated customers;
 - “same region” does not always imply identical network behavior.
+
+At the application layer, you normally cannot choose each Internet hop. You can influence the outcome indirectly—such as by using multiple regions, CDNs, anycast, or multiple providers—but BGP and the participating networks decide the actual inter-network path.
 
 ---
 
 ## 6.2 Anycast
 
-With anycast, multiple locations advertise the same service IP.
+Anycast lets multiple geographically distributed servers advertise the same IP prefix. BGP routes each requester toward the advertisement its network considers best, usually resulting in a nearby entry point without the requester having to select a region.
 
-Routing delivers clients to one of those locations.
+A practical example is Cloudflare's public DNS resolver, `1.1.1.1`. Cloudflare advertises the prefix containing that address (for example, `1.1.1.0/24`) from many points of presence worldwide:
 
-```mermaid
-flowchart TD
-    IP[Anycast IP<br/>203.0.113.10]
-
-    IP --> A[Amsterdam PoP]
-    IP --> B[Frankfurt PoP]
-    IP --> C[New York PoP]
-    IP --> D[Singapore PoP]
+```text
+New York client   → 1.1.1.1 → a Cloudflare site reachable via its preferred route
+London client     → 1.1.1.1 → potentially a different Cloudflare site
+Singapore client  → 1.1.1.1 → potentially another Cloudflare site
 ```
 
-This is common for:
+The IP address is always `1.1.1.1`, but each ISP may learn several BGP routes for `1.1.1.0/24`—one via each Cloudflare location or interconnection. It selects a route according to its BGP policy (such as peering relationship, cost, and AS-path length), then forwards DNS packets to that next hop. Each subsequent network does the same until traffic reaches a Cloudflare location.
+
+“Nearby” here means **best according to BGP topology and policy**, not necessarily geographically closest. This is still valuable because it typically reduces latency, distributes traffic and DDoS load among many sites, and allows traffic to shift elsewhere when a site withdraws its advertisement.
+
+Anycast is common for:
 
 - DNS;
 - CDNs;
@@ -518,17 +663,7 @@ This is common for:
 - DDoS protection;
 - global ingress.
 
-Anycast is attractive because routing itself directs users toward available topology.
-
-But “nearest” means **routing-nearest**, not necessarily geographically nearest or application-optimal.
-
-### Architectural implication
-
-Anycast works especially well when edge locations are largely interchangeable.
-
-If every connection requires large amounts of location-specific state, path changes become more complicated.
-
-QUIC connection IDs are partly useful because a connection need not be identified solely by an IP/port tuple.
+For anycast to work well, each announced location must provide equivalent enough service. It is especially well suited to short, stateless exchanges such as DNS lookups. Stateful long-lived connections require more careful design, because BGP route changes can cause later packets to arrive at a different site. QUIC connection IDs help because a connection need not be identified solely by an IP/port tuple.
 
 ---
 
@@ -540,9 +675,9 @@ Ethernet commonly uses an MTU around 1500 bytes, though tunnels, VPNs, overlays,
 
 The end-to-end usable size is constrained by the smallest MTU along the path:
 
-\[
+$$
 PMTU = \min(MTU_1, MTU_2, ..., MTU_n)
-\]
+$$
 
 This is the **Path MTU**.
 
@@ -601,6 +736,18 @@ sequenceDiagram
     R-->>C: cached answer
 ```
 
+When an application needs to contact `api.example.com`, it first asks a **recursive resolver**—often one configured by the OS, router, company, ISP, or a public DNS provider—for an IP address. The application normally makes this one request; the resolver performs the remaining lookup work and caches the result for later clients.
+
+Reading the diagram from top to bottom on a cache miss:
+
+1. The client asks the recursive resolver for `api.example.com`.
+2. The resolver asks a **root** server, which does not know the service IP but returns a referral to servers responsible for `.com`.
+3. The resolver asks a **`.com` TLD** server, which returns a referral to the authoritative name servers for `example.com`.
+4. The resolver asks an **authoritative DNS server** for the actual record. That server is the source of truth for `example.com` and returns, for example, an IPv4 **A** record or IPv6 **AAAA** record, together with a TTL.
+5. The resolver caches that answer until its TTL expires and returns it to the client. The client can then open a network connection to the returned IP address.
+
+The root and TLD servers provide **delegations**—directions to the next set of servers—not the final IP for most hostnames. In the usual case, subsequent clients are much faster because one of the caches already holds the final answer, so the resolver need not repeat the root → TLD → authoritative sequence.
+
 In reality, multiple caches may exist:
 
 - application;
@@ -637,22 +784,37 @@ Therefore DNS changes and connection lifetime interact.
 
 ## 8.2 Negative caching
 
-DNS also caches failures such as:
+DNS also caches **negative answers**: results saying that a requested name or record does not exist. The most familiar is:
 
 ```text
-NXDOMAIN
+NXDOMAIN  = the queried hostname does not exist
 ```
 
-This is operationally important.
+A different negative response is `NOERROR` with no records of the requested type. For example, `example.com` may exist and have an `A` record but no `AAAA` record; an IPv6 lookup can cache that “no AAAA record” answer. Resolvers normally cache these failures for a negative TTL, commonly derived from the authoritative zone's SOA record, rather than forever.
+
+This can happen when:
+
+- a client requests a hostname before its DNS record has been created;
+- a record was accidentally deleted or a zone was temporarily misconfigured;
+- a deployment adds an `AAAA`, MX, TXT, or other record type after clients have already looked it up;
+- a typo, probing client, health check, or old application version requests a nonexistent name.
 
 Suppose deployment order is:
 
-1. client requests a hostname that does not yet exist;
-2. resolver receives `NXDOMAIN`;
-3. DNS record is created;
-4. resolver continues returning cached negative result.
+1. client requests `new-api.example.com` before it exists;
+2. the resolver receives and caches `NXDOMAIN`;
+3. the DNS record is created;
+4. until the negative TTL expires, that resolver may continue returning the cached negative result.
 
-The infrastructure is now correct while some clients still fail.
+The DNS infrastructure is now correct while some clients still fail. Different resolvers may have cached the failure at different times, so the problem can appear inconsistent across users.
+
+### Recovery and prevention
+
+- **Wait for the negative TTL to expire.** Public recursive resolvers generally cannot be force-flushed by the domain owner.
+- **Flush caches you control**—for example, a local development resolver, an enterprise resolver, or application DNS cache—when operationally appropriate.
+- **Verify the authoritative answer first.** Confirm that the authoritative name servers return the intended record before diagnosing client caches.
+- **Create the DNS record before deploying clients that depend on it**, and allow time for resolvers to observe it before switching production traffic.
+- **Use a reasonable negative TTL/SOA configuration.** A shorter value reduces recovery time but increases authoritative DNS query load. It should be planned ahead of an incident; changing it after a resolver has cached an error does not invalidate that existing entry.
 
 This is one reason rollout ordering matters.
 
@@ -842,9 +1004,9 @@ Question:
 
 The receiver advertises a receive window:
 
-\[
+$$
 rwnd
-\]
+$$
 
 This protects the receiver from being overwhelmed.
 
@@ -858,15 +1020,15 @@ Question:
 
 The sender maintains a congestion window:
 
-\[
+$$
 cwnd
-\]
+$$
 
 The effective amount of unacknowledged data is limited approximately by:
 
-\[
+$$
 sendWindow = \min(rwnd, cwnd)
-\]
+$$
 
 So:
 
@@ -918,15 +1080,15 @@ RTT            = 100 ms
 
 The amount of data needed in flight to fill the path is:
 
-\[
+$$
 BDP = bandwidth \times RTT
-\]
+$$
 
-\[
+$$
 = 1 \text{ Gbit/s} \times 0.1s
 = 100 \text{ Mbit}
 \approx 12.5 \text{ MB}
-\]
+$$
 
 If the sender can only have 1 MB outstanding, the 1 Gbit/s path can never be fully utilized.
 
@@ -1209,6 +1371,29 @@ The trade-off is that operators lose some of the passive observability they hist
 
 ---
 
+## 19.4 QUIC is not an alternative to HTTP/2
+
+QUIC and HTTP/2 are not peers. They sit one layer apart:
+
+```text
+HTTP/2  →  runs on top of  →  TCP
+HTTP/3  →  runs on top of  →  QUIC
+```
+
+QUIC operates at the same layer as TCP (transport). HTTP/3 operates at the same layer as HTTP/2 (application) — it is the mapping of HTTP semantics onto QUIC, the way HTTP/2 is the mapping of HTTP semantics onto TCP.
+
+> **QUIC replaces TCP. HTTP/3 replaces HTTP/2.**
+
+The confusion is understandable: HTTP/2's headline feature is multiplexed streams bolted onto TCP's single ordered byte stream (imperfectly — see 19.1's cross-stream head-of-line blocking). QUIC provides that same multiplexing natively, inside the transport itself. HTTP/3 is what HTTP looks like once it can rely on that native support instead of layering its own stream abstraction on top of TCP.
+
+| | Transport | Multiplexing |
+|---|---|---|
+| HTTP/1.1 | TCP | none |
+| HTTP/2 | TCP | app-layer streams over TCP's one byte stream |
+| HTTP/3 | QUIC | QUIC's native transport-layer streams |
+
+---
+
 # 20. TLS: confidentiality is only one property
 
 HTTPS is essentially:
@@ -1286,13 +1471,60 @@ You must know where TLS terminates.
 
 ## 20.3 mTLS
 
-Mutual TLS allows both endpoints to authenticate certificates.
+In normal HTTPS, only the **server** presents a certificate. The client verifies it and trusts `api.example.com`. The client does not prove its own identity at the TLS layer — that happens later (session cookie, JWT, API key, etc.; see 20.1).
 
-It is useful for machine identity in controlled environments.
+**Mutual TLS (mTLS)** requires **both** endpoints to present a certificate and verify the peer's certificate before any HTTP traffic is exchanged. It is primarily used for **machine identity** in service-to-service or zero-trust environments (service mesh sidecars, internal APIs, SPIFFE/SPIRE).
 
-But mTLS should not be confused with application authorization.
+### Concrete example: order fulfillment calling payment
 
-A valid certificate might establish:
+Three services run inside a Kubernetes cluster with Istio sidecars issuing workload certificates:
+
+```text
+inventory-service          payment-service
+  cert: inventory-svc         cert: payment-svc
+  SPIFFE ID:                  SPIFFE ID:
+  spiffe://shop/inventory     spiffe://shop/payment
+```
+
+When `inventory-service` needs stock levels after a purchase, it calls `payment-service`:
+
+```mermaid
+sequenceDiagram
+    participant Inv as inventory-service
+    participant Pay as payment-service
+
+    Note over Inv,Pay: mTLS handshake before HTTP
+    Inv->>Pay: ClientHello and client certificate
+    Pay->>Inv: ServerHello and server certificate
+    Note over Inv: Verify Pay cert via mesh CA
+    Note over Pay: Verify Inv cert via mesh CA
+    Note over Inv,Pay: Encrypted channel, both identities known
+
+    Inv->>Pay: GET payment status for order 42
+    Pay->>Inv: 200 OK
+```
+
+After the handshake, `payment-service` knows the TCP peer is **`inventory-service`**, not some random pod on the cluster network. Without mTLS, any compromised internal host could impersonate a caller on plaintext HTTP behind the load balancer (see 20.2).
+
+### What mTLS establishes vs what it does not
+
+Suppose `inventory-service` later sends:
+
+```http
+POST /refunds HTTP/1.1
+Host: payment-service
+Content-Type: application/json
+
+{ "orderId": "42", "amountCents": 5000, "reason": "damaged" }
+```
+
+| Layer | Question | Answer with mTLS |
+|---|---|---|
+| Transport | Who is calling? | `inventory-service` (certificate verified) |
+| Transport | Is the channel encrypted and tamper-proof? | Yes |
+| Application | Is this caller allowed to refund $50 on order 42? | **Unknown** — mTLS does not decide |
+
+mTLS might establish:
 
 ```text
 caller = inventory-service
@@ -1304,17 +1536,102 @@ The application still needs a policy answering:
 may inventory-service call RefundPayment?
 ```
 
+A minimal authorization layer on top of mTLS might look like:
+
+```text
+policy:
+  inventory-service  →  GET  /orders/*           ✓ allowed
+  inventory-service  →  POST /refunds            ✗ denied
+  admin-service      →  POST /refunds            ✓ allowed (with audit log)
+```
+
+`payment-service` rejects the refund with `403 Forbidden` even though the mTLS handshake succeeded and the caller's identity is genuine.
+
+### One-way TLS vs mTLS (same cluster)
+
+| | Browser → API (public) | inventory-service → payment-service (internal) |
+|---|---|---|
+| Server cert | Yes (`api.example.com`) | Yes (`payment-svc`) |
+| Client cert | No | Yes (`inventory-svc`) |
+| Typical identity proved | Server hostname | **Both** workloads |
+| User authorization | App layer (JWT, session) | App layer (RBAC, OPA, IAM) |
+
+> **mTLS authenticates machines; authorization policies decide what those machines may do.**
+
 ---
 
 ## 20.4 TLS 1.3 and 0-RTT
 
-TLS 1.3 reduced handshake cost and supports session resumption.
+TLS 1.3 cut handshake latency compared with TLS 1.2. A **new** connection typically needs **one round trip (1-RTT)** before application data flows, down from two in TLS 1.2. It also supports **session resumption**: the server issues a session ticket or pre-shared key (PSK) so a returning client can skip much of the full handshake.
 
-It also defines 0-RTT early data.
+On a **resumed** connection, TLS 1.3 adds **0-RTT early data**: the client may send application bytes in the **first flight**, before the server completes the handshake reply.
 
-The architectural catch:
+### What RTT means here
 
-> **0-RTT data has weaker replay guarantees.**
+An **RTT** is one there-and-back on the network: client sends a packet, server responds.
+
+```text
+1-RTT handshake (TLS 1.3, new connection):
+
+  Client ── ClientHello ──────────────────> Server
+  Client <── ServerHello + cert + Finished ── Server
+           ↑ one RTT before encrypted app data
+
+0-RTT (resumed session only):
+
+  Client ── ClientHello + early data (e.g. GET feed) ──> Server
+           ↑ app data sent immediately, no wait for ServerHello
+```
+
+0-RTT saves roughly **one RTT of latency** on repeat visits. That matters on mobile or high-latency paths where every RTT is tens to hundreds of milliseconds.
+
+### Concrete example: return visit to an API
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as API server
+
+    Note over C,S: First visit - full 1-RTT handshake
+    C->>S: ClientHello
+    S->>C: ServerHello, certificate, Finished
+    Note over C: Store session ticket from server
+
+    Note over C,S: Return visit - 0-RTT resumption
+    C->>S: ClientHello plus early data GET feed
+    S->>C: ServerHello, Finished
+    Note over S: May serve early GET before handshake completes
+```
+
+The early `GET /feed` bytes ride in the same flight as `ClientHello`. The client does not wait for `ServerHello` first. That is the performance win.
+
+0-RTT applies only when the client already has a valid **session ticket or PSK** from a prior connection. It is not available on a first-ever visit.
+
+### The architectural catch: replay
+
+0-RTT data has **weaker replay guarantees** than data sent after the handshake completes.
+
+An attacker who records the client's first flight could **replay** it:
+
+```text
+Recorded:  ClientHello + POST transfer amount 100
+Replayed:  same bytes sent again later
+```
+
+The server may accept and process the replayed early data because, at the TLS layer, it cannot always distinguish:
+
+- a legitimate client retry after a lost packet, from
+- a malicious replay of an earlier 0-RTT request.
+
+| Reasonable for 0-RTT | Risky for 0-RTT |
+|---|---|
+| Idempotent reads (`GET /feed`, static assets) | Transfers, refunds, password changes |
+| Responses where duplicate execution is harmless | "Place order", "delete account" |
+| Cacheable, read-only API calls | Any operation that must run **exactly once** |
+
+Mitigations live in the application or at the edge: disable 0-RTT for mutation routes, require idempotency keys, use anti-replay nonces, or reject early data on sensitive endpoints entirely.
+
+> **0-RTT is a transport-layer latency optimization, not a correctness guarantee for mutations.**
 
 Therefore replay-sensitive mutations need particular care.
 
@@ -1328,77 +1645,234 @@ This is a recurring Staff+ pattern:
 
 # 21. HTTP/1.1, HTTP/2, and HTTP/3
 
-The HTTP version changes how requests share transport resources.
+HTTP defines **semantics**: methods (`GET`, `POST`), headers, status codes, and resource-oriented messaging. The **version** changes how many requests share a connection, how headers are encoded, and which transport sits underneath.
 
-## HTTP/1.1
+```text
+HTTP/1.1  →  TLS  →  TCP  →  IP
+HTTP/2    →  TLS  →  TCP  →  IP
+HTTP/3    →  TLS integrated in QUIC  →  UDP  →  IP
+```
 
-Typical characteristics:
-
-- persistent TCP connections;
-- sequential request/response behavior per connection in common deployments;
-- multiple connections often used for concurrency.
-
-Problem:
-
-A slow request can block subsequent work on the same connection.
+The application contract ("fetch this URL, return 200 and a body") stays familiar across versions. What changes is **efficiency, concurrency, and failure modes** on the wire. See also [[#19.4 QUIC is not an alternative to HTTP/2|19.4]] for how QUIC and HTTP/2 relate.
 
 ---
 
-## HTTP/2
+## 21.1 HTTP/1.1
 
-HTTP/2 introduces streams:
+HTTP/1.1 (RFC 9112) is the baseline most developers still think in: plaintext request/response messages (usually wrapped in TLS as HTTPS).
+
+### Request/response model
+
+```http
+GET /api/orders/42 HTTP/1.1
+Host: shop.example.com
+Accept: application/json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 87
+
+{ "orderId": "42", "status": "shipped" }
+```
+
+Each exchange is logically independent. Headers like `Host` (required in 1.1), `Connection: keep-alive`, cookies, and caching directives (`Cache-Control`, `ETag`) all belong to this layer.
+
+### Persistent connections and concurrency limits
+
+Before HTTP/1.1, clients often opened **one TCP connection per request** — expensive on high-latency links (TCP + TLS setup for every asset).
+
+HTTP/1.1 introduced **persistent connections** (`Connection: keep-alive`): one TCP socket serves many sequential requests. That helped, but by default a connection still handles **one in-flight request at a time** in common deployments (pipelining existed but was rarely used correctly and is effectively dead).
+
+Problem on a single connection:
+
+```text
+Request A (slow DB query) ──────────────────────────>
+Request B (tiny health check) waits behind A ───────>
+Request C waits behind B ───────────────────────────>
+```
+
+A slow request **blocks** later work on the same connection — HTTP-layer head-of-line blocking.
+
+### Browser workaround: many connections
+
+To load a page with dozens of assets, browsers open **multiple parallel TCP connections** to the same origin (historically ~6 per host):
+
+```text
+Origin: shop.example.com
+
+  TCP conn 1 ── GET /index.html
+  TCP conn 2 ── GET /app.js
+  TCP conn 3 ── GET /styles.css
+  TCP conn 4 ── GET /logo.png
+  ...
+```
+
+This restores concurrency at the cost of:
+
+- more TCP + TLS handshakes;
+- more memory and file descriptors on client and server;
+- uneven load across connections.
+
+### Concrete example: 40 assets on HTTP/1.1
+
+A product page needs 1 HTML document and 39 static assets from the same origin. With six parallel connections, the browser needs **at least seven "waves"** of requests. On a 100 ms RTT link, connection setup and serialization can dominate time-to-interactive even when each asset is small.
+
+| Property | HTTP/1.1 typical behavior |
+|---|---|
+| Multiplexing | None (one request at a time per connection) |
+| Header encoding | Plaintext, repeated on every request |
+| Transport | TCP |
+| Concurrency strategy | Multiple TCP connections per origin |
+
+---
+
+## 21.2 HTTP/2
+
+HTTP/2 (RFC 9113) keeps the same HTTP semantics but changes the **wire format**: binary **frames** on one (or few) long-lived TCP connections.
+
+### Multiplexed streams
 
 ```text
 one TCP connection
 
-stream 1 ───────>
-stream 3 ──>
-stream 5 ─────────────>
+stream 1 ── GET /index.html ──────────────>
+stream 3 ── GET /app.js ──>
+stream 5 ── GET /styles.css ─────────────>
+stream 7 ── GET /api/cart ─────────────────────>
 ```
+
+Many requests and responses **interleave** on one connection. No need for six parallel TCP handshakes to the same origin.
 
 Advantages:
 
-- multiplexing;
-- header compression;
-- fewer TCP connections;
-- per-stream flow control.
+- **multiplexing** — concurrent requests without opening many TCP connections;
+- **HPACK header compression** — repeated headers (`Cookie`, `:authority`, etc.) compress well across requests;
+- **stream-level flow control** — backpressure per stream, not only per connection;
+- **server push** (rarely used in practice today) — server could push assets before the client asked; most teams disabled it due to cache complexity.
 
-However:
+Negotiation happens during TLS via **ALPN**: client offers `h2`, server picks HTTP/2 if supported. gRPC, many service meshes, and modern browsers use HTTP/2 heavily internally.
+
+### Shared TCP fate (the catch)
+
+HTTP/2 streams are independent at the **HTTP** layer, but they still share **one ordered TCP byte stream**:
 
 ```text
 HTTP/2 streams
       ↓
 single TCP byte stream
+      ↓
+one lost packet stalls delivery of all later bytes
+      ↓
+unrelated streams may wait (transport-level HoL blocking)
 ```
 
-Packet loss can create shared transport-level blocking.
+If packet loss is meaningful, a lost segment on stream 1 can delay bytes belonging to stream 5 until TCP retransmits. See [[#19.1 Why QUIC exists|19.1]] for the full picture.
+
+| Property | HTTP/2 typical behavior |
+|---|---|
+| Multiplexing | Yes, many streams per TCP connection |
+| Header encoding | HPACK (binary, compressed) |
+| Transport | TCP |
+| Main residual pain | TCP-level head-of-line blocking under packet loss |
 
 ---
 
-## HTTP/3
+## 21.3 HTTP/3
 
-HTTP/3 provides HTTP semantics over QUIC.
+HTTP/3 (RFC 9114) is **HTTP semantics mapped onto QUIC**, not a new API model.
 
 ```text
 HTTP/3
    ↓
-QUIC streams
+QUIC streams (reliable, multiplexed, TLS integrated)
    ↓
 UDP
    ↓
 IP
 ```
 
-Its value is particularly relevant where:
+> **QUIC replaces TCP. HTTP/3 replaces HTTP/2 as the HTTP mapping.** Same methods and status codes — different transport.
 
-- RTT is meaningful;
-- packet loss occurs;
-- clients move between networks;
-- large numbers of concurrent resources are transferred.
+### Why move HTTP off TCP?
+
+QUIC provides at the transport layer what HTTP/2 tried to simulate on top of TCP:
+
+- **independent reliable streams** — loss on one stream does not block unrelated streams the way TCP ordering does;
+- **integrated TLS 1.3** — fewer setup round trips than TCP + TLS stacked separately;
+- **connection IDs** — better behavior when clients switch networks (Wi-Fi to cellular); see [[#19.2 Connection IDs and migration|19.2]].
+
+HTTP/3 is especially valuable where:
+
+- RTT is high (mobile, cross-region);
+- packet loss is non-trivial;
+- clients roam between networks;
+- pages fetch **many concurrent small resources** (typical web apps, APIs with parallel fetches).
+
+### Deployment realities
+
+HTTP/3 uses **UDP**, usually port 443. Uptake is broad among browsers and CDNs, but operators should verify:
+
+- firewalls and security groups allow UDP 443;
+- load balancers terminate or pass QUIC correctly;
+- observability tools may see less plaintext transport detail than with TCP (QUIC encrypts more than classic TCP headers).
+
+Clients often learn HTTP/3 support via **`Alt-Svc`** response headers or cached prior knowledge, then connect over QUIC on later requests while still speaking HTTP/1.1 or HTTP/2 on the first visit.
+
+| Property | HTTP/3 typical behavior |
+|---|---|
+| Multiplexing | Yes, native QUIC streams |
+| Header encoding | QPACK (compression adapted for QUIC) |
+| Transport | QUIC over UDP |
+| Main trade-off | Infrastructure and operational maturity vs TCP |
 
 ---
 
-## Staff+ heuristic
+## 21.4 Version negotiation and coexistence
+
+Servers commonly expose multiple versions at once:
+
+```text
+TLS handshake (ALPN)
+  client offers: h2, http/1.1
+  server selects: h2
+  → HTTP/2 over TCP port 443
+
+Separate path:
+  client discovers HTTP/3 via Alt-Svc or known config
+  → HTTP/3 over QUIC on UDP port 443
+```
+
+Typical production pattern:
+
+1. **First visit:** HTTP/2 (or HTTP/1.1 fallback) over TCP.
+2. **Server advertises** HTTP/3 availability.
+3. **Later requests:** client may prefer HTTP/3 where supported.
+
+Fallback matters: if UDP is blocked, clients should still work over TCP. Do not assume HTTP/3-only without testing corporate networks and restrictive NAT environments.
+
+Internal service-to-service traffic often stays on **HTTP/2 over TCP** (gRPC, mesh sidecars) because the environment is controlled and QUIC's mobile/migration wins matter less than operational simplicity.
+
+---
+
+## 21.5 Comparison at a glance
+
+| | HTTP/1.1 | HTTP/2 | HTTP/3 |
+|---|---|---|---|
+| Wire format | Text | Binary frames | Binary frames |
+| Multiplexing | No (per connection) | Yes (streams on TCP) | Yes (QUIC streams) |
+| Header compression | None | HPACK | QPACK |
+| Transport | TCP | TCP | QUIC (UDP) |
+| TLS | Separate layer | Separate layer | Integrated in QUIC |
+| Parallelism pattern | Many TCP connections | One (or few) TCP connections | One QUIC connection |
+| HoL blocking risk | HTTP layer (serial requests) | TCP layer (shared byte stream) | Reduced cross-stream TCP-style blocking |
+| Typical external client | Fallback, legacy | Default on modern HTTPS | Increasingly preferred when available |
+| Typical internal RPC | REST over 1.1 still seen | gRPC, mesh | Less common internally today |
+
+Same URL, same JSON body — different connection economics.
+
+---
+
+## 21.6 Staff+ heuristic
 
 Do not choose an HTTP version by benchmark headline.
 
@@ -1408,9 +1882,18 @@ Ask:
 - Is RTT high?
 - Is packet loss meaningful?
 - Do clients roam between networks?
-- Does the infrastructure support QUIC well?
-- What does connection termination do to load balancing?
+- Does the infrastructure support QUIC well (UDP 443, LB, firewalls)?
+- What does connection termination do to load balancing and draining?
 - What observability do operators require?
+- Is the workload **browser-facing** (many parallel small fetches) or **service-to-service** (long-lived gRPC channels)?
+
+Practical defaults in 2026:
+
+- **Public web/API:** support HTTP/2 and HTTP/3 where infrastructure allows; keep HTTP/1.1 fallback for odd clients.
+- **Internal microservices:** HTTP/2 (often via gRPC) remains the common default unless you have a concrete QUIC win.
+- **Do not** open six HTTP/1.1 connections per origin in new client code — use a modern stack that multiplexes.
+
+> **Pick the version that matches your RTT, loss, concurrency, and ops constraints — not the one with the best lab chart.**
 
 ---
 
@@ -1490,13 +1973,13 @@ This can reduce client round trips while increasing server-side complexity.
 
 Therefore important controls include:
 
-- query depth;
-- query cost;
-- resolver batching;
-- N+1 avoidance;
-- fanout limits;
-- deadlines;
-- caching.
+- **query depth** — limits nested relation depth to prevent recursive or circular queries from causing unbounded backend traversal;
+- **query cost** — calculates static complexity weights for requested fields/arguments before execution to reject overly expensive queries upfront;
+- **resolver batching** — coalesces multiple individual field resolutions across sibling nodes into single batched backend/database requests;
+- **N+1 avoidance** — uses DataLoader or per-request deduplication patterns to prevent issuing separate downstream requests for each item in a collection;
+- **fanout limits** — caps the maximum number of concurrent downstream service/database calls that a single query can spawn;
+- **deadlines** — propagates end-to-end request timeout budgets across all resolvers so lagging or abandoned sub-queries abort early;
+- **caching** — uses persisted queries (enabling HTTP GET CDN caching), gateway-level caching, or normalized client caches to avoid repeating expensive backend aggregations.
 
 Network work did not disappear.
 
@@ -1523,22 +2006,63 @@ It is especially useful for controlled service-to-service environments.
 
 ## 24.1 gRPC channels are long-lived
 
-A gRPC client commonly maintains a channel.
+A gRPC client commonly creates and maintains a **channel** (a virtual connection abstraction) rather than opening a new TCP connection per request.
 
-Underneath, the channel can maintain one or more HTTP/2 connections/subchannels.
+Underneath, the channel manages:
 
-This has an important consequence:
+- **name resolution** — resolving hostnames to a set of backend endpoint IP addresses;
+- **subchannels** — individual, persistent HTTP/2 transport connections to specific backend instances;
+- **load balancing policy** — scheduling individual RPC calls across active subchannels (`pick_first`, `round_robin`, xDS);
+- **connection health and keepalives** — HTTP/2 `PING` frames to detect dead transports and keep intermediate NAT/firewall state alive.
 
-> **Load balancing occurs over long-lived transport state.**
+```mermaid
+flowchart LR
+    subgraph Client["gRPC Client Channel"]
+        Resolver["Name Resolver / DNS"]
+        LB["Channel LB Policy"]
+        SC1["Subchannel 1"]
+        SC2["Subchannel 2"]
+    end
 
-If every client creates one channel to one backend and keeps it forever, adding new servers does not magically redistribute existing traffic.
+    subgraph Backends["Backend Pods / VMs"]
+        B1["Backend A"]
+        B2["Backend B"]
+        B3["Backend C (New Replica)"]
+    end
 
-This becomes relevant during:
+    Resolver --> LB
+    LB --> SC1
+    LB --> SC2
+    SC1 -->|HTTP/2 TCP| B1
+    SC2 -->|HTTP/2 TCP| B2
+    LB -.->|No connection| B3
+```
 
-- autoscaling;
-- regional failover;
-- rolling deployments;
-- backend imbalance.
+### The L4 load balancing trap (connection pinning)
+
+Because gRPC multiplexes all concurrent RPCs over persistent HTTP/2 connections, placing a standard **L4 (TCP) load balancer** in front of gRPC backends causes severe traffic imbalance:
+
+1. The client opens a single TCP handshake through the L4 proxy on startup.
+2. The L4 proxy routes that connection to one specific backend instance (e.g., Backend A).
+3. **All subsequent RPCs flow over that single pinned TCP connection to Backend A indefinitely.**
+
+> [!warning] Load balancing occurs over transport state, not request state
+> If 10 clients connect to 10 backend instances, and autoscaling spins up 10 new instances, **the new instances receive 0% of the traffic** until existing clients disconnect or re-resolve.
+
+This becomes critical during:
+
+- **Autoscaling:** New instances remain idle while existing instances absorb all load increases.
+- **Rolling deployments:** Terminating an old instance severs a multiplexed channel holding hundreds of in-flight RPCs, causing error bursts and latency spikes.
+- **Resource hotspots:** A single degraded or slow backend harms all concurrent streams multiplexed over that connection.
+
+### Mitigations and architectural patterns
+
+To achieve effective load distribution with long-lived gRPC channels:
+
+- **L7 reverse proxy or service mesh (Envoy, Linkerd):** An L7 proxy terminates HTTP/2 from clients, parses individual RPC frames, and balances requests across upstream backend pools on a per-request boundary.
+- **Client-side load balancing (Native / xDS):** Use Kubernetes headless services, DNS SRV/A records, or an xDS control plane so the client channel learns all backend IPs, maintains subchannels to all healthy instances, and balances RPCs directly (e.g., round-robin or least-loaded).
+- **Connection lifetime limits (`MAX_CONNECTION_AGE` / `GOAWAY`):** Servers emit HTTP/2 `GOAWAY` frames after a configured duration (e.g. 5–15 minutes) or request count, forcing clients to gracefully drain in-flight RPCs, re-resolve endpoints, and reconnect across newly provisioned replicas.
+- **Active keepalives and gRPC health checks:** Use gRPC keepalive pings and the standard gRPC Health Checking Protocol to proactively evict failed subchannels and avoid routing RPCs to stalled connections.
 
 ---
 
@@ -1620,25 +2144,92 @@ First define communication shape.
 
 # 26. Server-Sent Events
 
-SSE creates a long-lived HTTP response carrying a stream of events.
+SSE (Server-Sent Events) creates a long-lived, unidirectional HTTP response stream from server to client over standard HTTP (`text/event-stream`).
 
-Conceptually:
+### How SSE works under the hood
 
-```text
-client  ─── HTTP request ───>
-server  ─── event 1 ────────>
-        ─── event 2 ────────>
-        ─── event 3 ────────>
+The client initiates a standard HTTP request (typically via the browser `EventSource` API or standard HTTP client):
+
+```http
+GET /api/agent/stream HTTP/1.1
+Host: api.example.com
+Accept: text/event-stream
+Cache-Control: no-cache
 ```
 
-It is server-to-client only.
+The server responds with streaming HTTP headers and leaves the transport connection open indefinitely:
 
-Advantages:
+```http
+HTTP/1.1 200 OK
+Content-Type: text/event-stream; charset=utf-8
+Cache-Control: no-cache, no-transform
+Connection: keep-alive
+X-Accel-Buffering: no
+```
 
-- native browser API;
-- HTTP semantics;
-- straightforward intermediary support;
-- built-in reconnection behavior.
+### Event framing protocol
+
+SSE streams are formatted as plain UTF-8 text blocks delimited by double newlines (`\n\n`). Each field in a block uses a key-value format:
+
+- `data:` — payload data (can be multi-line text or JSON strings);
+- `event:` — custom event type (allows client to attach specific event listeners, e.g. `source.addEventListener('tool_call', ...)`);
+- `id:` — unique message identifier (tracked by client and returned via `Last-Event-ID` on reconnect);
+- `retry:` — client reconnection wait time in milliseconds;
+- `:` — comment line / heartbeat ping (ignored by parser; keeps intermediate proxies and NATs alive).
+
+```text
+id: 101
+event: thought
+data: {"step": "searching codebase", "tool": "Grep"}
+
+: keepalive ping
+
+id: 102
+event: token
+data: {"delta": "Found 3 matching files."}
+
+```
+
+### Lifecycle and Streaming Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client as Client (IDE / Browser)
+    participant Gateway as L7 Proxy / Gateway
+    participant Agent as Backend / AI Agent
+
+    Client->>Gateway: POST /v1/agent/run (Accept: text/event-stream)
+    Gateway->>Agent: Forward request
+    Agent-->>Gateway: 200 OK (Content-Type: text/event-stream)
+    Gateway-->>Client: Stream opened
+
+    Agent-->>Client: event: status (step: analyzing)
+    Agent-->>Client: event: tool_call (tool: Grep, args: {...})
+    Agent-->>Client: event: token (delta: "Refactoring ")
+    Agent-->>Client: event: token (delta: "complete.")
+    Agent-->>Client: ping keepalive (: ping)
+
+    Note over Client,Gateway: Connection dropped (network blip)
+
+    Client->>Gateway: GET /v1/agent/run (Last-Event-ID: 104)
+    Gateway->>Agent: Reconnect with Last-Event-ID: 104
+    Agent-->>Client: event: token (delta: " Resuming...")
+    Agent-->>Client: event: done (exit_code: 0)
+```
+
+### Where SSE excels: Applications and Use Cases
+
+1. **AI coding agents and LLM streaming (Cursor, Claude Code, Copilot, ChatGPT):**
+   - **Asymmetric communication:** The client sends an initial prompt/task payload (via HTTP POST), and the backend streams incremental output tokens, live thought traces, tool execution calls (`tool_call`, `tool_result`), diff hunks, and lifecycle status updates (`running`, `waiting_user_input`, `completed`).
+   - **Infrastructure simplicity:** Unlike WebSockets, SSE uses standard HTTP requests. Existing authentication headers (`Authorization: Bearer ...`), session cookies, tracing IDs, and API gateways work out of the box without custom subprotocol negotiation.
+   - **Native browser & CLI support:** Built-in `EventSource` in browsers and straightforward chunk-decoding in CLI environments (curl, Python `httpx`, Node.js `fetch`).
+
+2. **Live telemetry and CI/CD pipelines:**
+   - Real-time build / test log streaming (e.g. Harness, GitHub Actions runner logs), deployment rollout status, and server metrics dashboards.
+
+3. **Feed updates and notifications:**
+   - Live sports scores, stock tickers, status monitors, and inbox alerts where data flow is strictly server-to-client and client interactions remain standard REST calls.
 
 ---
 
@@ -1646,7 +2237,7 @@ Advantages:
 
 SSE supports event IDs.
 
-A reconnecting client can communicate the last observed ID.
+A reconnecting client automatically communicates the last observed ID via the `Last-Event-ID` request header.
 
 That enables an application to implement:
 
@@ -1671,30 +2262,118 @@ the ID alone cannot recover them.
 So separate:
 
 ```text
-transport reconnection
+transport reconnection (provided natively by SSE / EventSource)
 ```
 
 from:
 
 ```text
-durable event replay
+durable event replay (requires Redis Streams, Kafka offset, or DB append-log)
 ```
+
+---
+
+## 26.2 Operational gotchas and networking constraints
+
+- **HTTP/1.1 connection pool exhaustion (`max-connections-per-host`):** In HTTP/1.1, browsers enforce a limit of 6 concurrent connections per origin. Opening 6 SSE browser tabs exhausts the entire domain connection pool, freezing all other API requests. **Mitigation:** Serve SSE over **HTTP/2 or HTTP/3**, where multiple SSE streams and regular API calls are multiplexed over a single TCP/QUIC connection.
+- **Intermediary proxy buffering:** Reverse proxies (Nginx, Cloudflare, Envoy, AWS ALB) often buffer upstream HTTP responses until a buffer fills or response ends, destroying real-time delivery. **Mitigation:** Instruct proxies not to buffer (e.g. `X-Accel-Buffering: no` for Nginx, `Cache-Control: no-transform`, or configuring proxy chunk streaming flush).
+- **Idle timeouts and NAT gateway drops:** Intermediate firewalls, AWS NAT Gateways, and L7 load balancers terminate idle TCP connections (often after 60–350 seconds of silence). **Mitigation:** The server must periodically send empty comment lines / heartbeat pings (`: ping\n\n` every 15–30s) to keep the transport active without triggering client event listeners.
+- **Unidirectional boundary:** SSE cannot send client data upstream over the active response stream. If bidirectional interactive streaming is required on a single channel (e.g. collaborative live canvas, multiplayer gaming, duplex audio), **WebSockets** or **gRPC bidirectional streaming** should be used instead.
 
 ---
 
 # 27. WebSockets
 
-WebSockets provide long-lived bidirectional messaging.
+WebSockets (RFC 6455) provide a long-lived, full-duplex, bidirectional communication channel over a single TCP (or TLS) connection.
 
-The classic handshake starts as HTTP and upgrades the connection.
+Unlike HTTP's request-response cycle or SSE's server-to-client unidirectional stream, both the client and the server can transmit discrete data frames independently at any time with minimal per-frame overhead (2–14 bytes vs. kilobytes of HTTP headers).
 
-Afterward:
+### How the WebSocket handshake works under the hood
 
-```text
-client ⇄ server
+The connection starts as a standard HTTP/1.1 request that negotiates an in-place protocol upgrade:
+
+1. **Client Upgrade Request:**
+   ```http
+   GET /ws/terminal HTTP/1.1
+   Host: api.example.com
+   Upgrade: websocket
+   Connection: Upgrade
+   Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+   Sec-WebSocket-Version: 13
+   Origin: https://app.example.com
+   ```
+
+2. **Server Upgrade Response:**
+   The server computes a SHA-1 hash of the client's `Sec-WebSocket-Key` concatenated with the standardized magic UUID (`258EAFA5-E914-47DA-95CA-C5AB0DC85B11`), base64-encodes it, and returns `101 Switching Protocols`:
+   ```http
+   HTTP/1.1 101 Switching Protocols
+   Upgrade: websocket
+   Connection: Upgrade
+   Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
+   ```
+
+Once the `101` response is transmitted, the underlying TCP/TLS connection stops speaking HTTP and transitions immediately into the raw binary WebSocket framing protocol.
+
+### Wire protocol and frame anatomy
+
+WebSockets frame data into binary chunks rather than relying on delimiter strings:
+
+- **FIN bit (1 bit):** Indicates whether this frame is the final fragment of a complete message.
+- **Opcode (4 bits):** Identifies the frame payload type:
+  - `0x1`: Text data (UTF-8 encoded);
+  - `0x2`: Binary data (raw buffers, ArrayBuffers, Protobuf/MessagePack);
+  - `0x8`: Connection Close (triggers clean shutdown);
+  - `0x9`: Ping (heartbeat probe);
+  - `0xA`: Pong (heartbeat response).
+- **MASK bit & Masking-Key (4 bytes):** All client-to-server frames **must** be XOR-masked with a 4-byte random key to prevent intermediaries and malicious scripts from poisoning shared transparent HTTP proxy caches. Server-to-client frames are unmasked.
+- **Payload Length (7 bits, 7+16 bits, or 7+64 bits):** Dynamically scales from 125 bytes up to 18 exabytes.
+
+### Lifecycle, Framing, and Multi-Node Pub/Sub Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client as Client (IDE / Browser)
+    participant Gateway as L7 Proxy / LB (Envoy)
+    participant WS as WebSocket Gateway Node
+    participant Broker as Redis / PubSub Broker
+
+    Client->>Gateway: GET /ws (Upgrade: websocket)
+    Gateway->>WS: Forward HTTP Upgrade
+    WS-->>Gateway: 101 Switching Protocols
+    Gateway-->>Client: 101 Switching Protocols (Connection Upgraded)
+
+    par Full-Duplex Messaging
+        Client->>WS: Masked Text Frame (User terminal input / stdin)
+        WS->>Broker: Publish session event
+        Broker-->>WS: Deliver remote collaborator event
+        WS-->>Client: Unmasked Text/Binary Frame (Terminal stdout / Token)
+    and Heartbeats & Keepalives
+        WS-->>Client: Ping Frame (0x9)
+        Client-->>WS: Pong Frame (0xA)
+    end
+
+    Note over Client,WS: Graceful Shutdown
+    Client->>WS: Close Frame (0x8, Code: 1000 Normal Closure)
+    WS-->>Client: Close Frame (0x8, Code: 1000)
+    WS-xClient: TCP FIN / Connection Closed
 ```
 
-Both peers can send frames independently.
+### Where WebSockets excel: Applications and Use Cases
+
+1. **Interactive AI coding agents, cloud IDEs, and developer tools:**
+   - **Interactive Terminal / PTY streaming:** Bi-directional terminal sessions (xterm.js streaming user keystrokes `stdin` and receiving live ANSI-escaped `stdout`/`stderr` from remote execution environments or sandboxes).
+   - **Human-in-the-loop interactive steering:** Real-time bi-directional intervention where the user can interrupt, steer, or confirm autonomous tool executions while the model is in the middle of generation.
+   - **Real-time duplex voice/audio agents:** Full-duplex speech-to-speech AI streaming (e.g., OpenAI Realtime API) sending live microphone PCM audio chunks upstream while receiving synthesized voice audio downstream with sub-300ms latency.
+
+2. **Collaborative workspaces and live canvas editing:**
+   - Tools like Figma, Miro, Google Docs, and Notion where multiple users concurrently edit documents and sync CRDT (Conflict-free Replicated Data Types) or OT (Operational Transformation) mutation deltas and live cursor presence.
+
+3. **High-frequency financial trading & order books:**
+   - Exchange trading desks that require bi-directional order entry, instantaneous fill notifications, and microsecond-level market depth updates without HTTP header overhead.
+
+4. **Multiplayer gaming and real-time state synchronization:**
+   - Low-latency player inputs, authoritative game state broadcasts, and in-game live chat.
 
 ---
 
@@ -1706,13 +2385,13 @@ For millions, state becomes architecture.
 
 Each connection can consume:
 
-- file descriptor;
-- kernel socket memory;
-- application session state;
-- TLS state;
-- proxy state;
-- heartbeat traffic;
-- routing ownership.
+- file descriptor (`nofile` limits in OS kernel);
+- kernel socket buffer memory (TCP `rmem`/`wmem`, typically 4KB–64KB per socket);
+- application session state (in-memory user profile, subscriptions, unacked queues);
+- TLS state (crypto session buffers);
+- proxy state (connection tracking entries in load balancers);
+- heartbeat traffic (CPU and network wakeups for periodic ping/pong frames);
+- routing ownership (which specific backend server holds which active user connection).
 
 This changes the scaling unit from:
 
@@ -1729,6 +2408,40 @@ messages / second
 bytes / second
 fanout / second
 ```
+
+---
+
+## 27.2 Distributed routing and horizontal fanout
+
+Because WebSockets are stateful and pinned to a specific server instance, a message sent from User A on Server 1 to User B connected to Server 2 cannot be routed directly in memory.
+
+```mermaid
+flowchart LR
+    subgraph Clients
+        UA["User A (Sender)"]
+        UB["User B (Receiver)"]
+    end
+
+    subgraph WS Cluster
+        S1["WebSocket Node 1"]
+        S2["WebSocket Node 2"]
+    end
+
+    subgraph Message Bus
+        Broker[("Redis Pub/Sub / Kafka")]
+    end
+
+    UA -->|Send message| S1
+    S1 -->|Publish to channel| Broker
+    Broker -->|Broadcast| S2
+    S2 -->|Deliver frame| UB
+```
+
+Horizontal WebSocket clusters require:
+
+- **Centralized Pub/Sub or Message Bus (Redis Streams, Kafka, NATS):** Nodes publish events to shared topics and subscribe to relevant channels.
+- **Connection Registry / Presence Store:** A fast distributed cache (e.g., Redis cluster) mapping `user_id → gateway_node_id` to route direct messages without full cluster broadcast.
+- **Graceful reconnect & session resumption:** Client stores a sequence token to replay missed messages from a durable log (Kafka/DB) upon reconnecting to a different server instance.
 
 ---
 

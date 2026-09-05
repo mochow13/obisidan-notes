@@ -15,10 +15,67 @@ created: 2026-08-19
 updated: 2026-08-19
 ---
 
+
 > [!summary]
 > Redis is best understood not merely as an "in-memory key-value cache," but as a **data-structure execution engine with serialized command execution, expiration, optional persistence, asynchronous replication, and sharding**.
 >
 > Its biggest architectural advantages are low latency, rich atomic data-structure operations, and a simple execution model. Its biggest traps are treating asynchronous replication as strong durability, confusing Sentinel with sharding, creating hot keys, and issuing operations whose cost grows with unexpectedly large collections.
+
+- [[#Executive Summary|Executive Summary]]
+- [[#2.1 In-memory primary access path|2.1 In-memory primary access path]]
+- [[#2.2 Mostly serialized command execution|2.2 Mostly serialized command execution]]
+- [[#2.3 Network round trips matter|2.3 Network round trips matter]]
+	- [[#2.3 Network round trips matter#Pipelining|Pipelining]]
+- [[#3.1 Strings|3.1 Strings]]
+	- [[#3.1 Strings#Conditional SET|Conditional SET]]
+	- [[#3.1 Strings#Atomic counters|Atomic counters]]
+	- [[#3.1 Strings#Modeling question|Modeling question]]
+	- [[#3.1 Strings#Failure problem|Failure problem]]
+	- [[#3.1 Strings#Scaling concern|Scaling concern]]
+- [[#Leaderboards|Leaderboards]]
+- [[#Priority queues|Priority queues]]
+- [[#Scheduling|Scheduling]]
+- [[#Sliding-window rate limiting|Sliding-window rate limiting]]
+- [[#At-least-once implications|At-least-once implications]]
+- [[#How geospatial data works internally|How geospatial data works internally]]
+	- [[#How geospatial data works internally#Encoding: GEOADD|Encoding: GEOADD]]
+	- [[#How geospatial data works internally#Querying: GEOSEARCH|Querying: GEOSEARCH]]
+	- [[#How geospatial data works internally#Distance: GEODIST|Distance: GEODIST]]
+	- [[#How geospatial data works internally#Concrete example|Concrete example]]
+	- [[#How geospatial data works internally#Why this design works well|Why this design works well]]
+	- [[#How geospatial data works internally#Limitations|Limitations]]
+- [[#Concrete example: daily active users|Concrete example: daily active users]]
+- [[#Approximate structures|Approximate structures]]
+- [[#Expiration|Expiration]]
+- [[#Eviction|Eviction]]
+- [[#5.1 Cache-aside|5.1 Cache-aside]]
+	- [[#5.1 Cache-aside#Trade-off|Trade-off]]
+	- [[#5.1 Cache-aside#Deeper interpretation|Deeper interpretation]]
+	- [[#5.1 Cache-aside#Interview heuristic|Interview heuristic]]
+- [[#19.1 Fixed Window|19.1 Fixed Window]]
+- [[#Redis is only a cache|Redis is only a cache]]
+- [[#Redis is the rate limiter|Redis is the rate limiter]]
+- [[#Redis is the job queue|Redis is the job queue]]
+- [[#Redis contains authoritative business state|Redis contains authoritative business state]]
+- [[#Semantics|Semantics]]
+- [[#Authority|Authority]]
+- [[#Atomicity|Atomicity]]
+- [[#Atomicity locality|Atomicity locality]]
+- [[#Partitioning|Partitioning]]
+- [[#Boundedness|Boundedness]]
+- [[#Failure semantics|Failure semantics]]
+- [[#Degradation|Degradation]]
+- [[#Memory|Memory]]
+- [[#Backpressure|Backpressure]]
+- [[#Recovery|Recovery]]
+- [[#Organizational coupling|Organizational coupling]]
+- [[#"Redis is fast because it's in memory."|"Redis is fast because it's in memory."]]
+- [[#"Redis Cluster gives strong consistency."|"Redis Cluster gives strong consistency."]]
+- [[#"We have replicas, therefore the data is durable."|"We have replicas, therefore the data is durable."]]
+- [[#"We'll use Pub/Sub for reliable jobs."|"We'll use Pub/Sub for reliable jobs."]]
+- [[#"We can fix it by adding shards."|"We can fix it by adding shards."]]
+- [[#"Redis commands are atomic, so my workflow is atomic."|"Redis commands are atomic, so my workflow is atomic."]]
+- [[#"We'll put a distributed lock around it."|"We'll put a distributed lock around it."]]
 
 ## Executive Summary
 
@@ -730,6 +787,198 @@ This is often a better design than making Redis the sole source of truth for tri
 
 ---
 
+## How geospatial data works internally
+
+Redis geo is not a separate data structure. It is a **Sorted Set in disguise**.
+
+The core trick:
+
+```text
+(longitude, latitude)
+        |
+        v
+52-bit geohash integer
+        |
+        v
+ZSET score
+```
+
+### Encoding: GEOADD
+
+When you execute:
+
+```redis
+GEOADD drivers -73.9857 40.7484 "driver:1"
+```
+
+Redis internally:
+
+1. Quantizes longitude and latitude into 26-bit integers by repeatedly bisecting the valid ranges:
+
+```text
+longitude -> [-180, 180]
+latitude  -> [-85.05, 85.05]
+```
+
+Each bit answers one question: is the coordinate in the upper half or lower half of the current range?
+
+```text
+bit = 1 -> upper half becomes the new range
+bit = 0 -> lower half becomes the new range
+```
+
+Worked example for longitude `-73.9857`:
+
+```text
+step  range                   mid         vs mid    bit   new range
+1     [-180,     180    ]      0.0000    below      0     [-180, 0]
+2     [-180,       0    ]    -90.0000    above      1     [-90, 0]
+3     [-90,        0    ]    -45.0000    below      0     [-90, -45]
+4     [-90,      -45    ]    -67.5000    below      0     [-90, -67.5]
+5     [-90,      -67.5  ]    -78.7500    above      1     [-78.75, -67.5]
+6     [-78.75,   -67.5  ]    -73.1250    below      0     [-78.75, -73.125]
+7     [-78.75,   -73.125]    -75.9375    above      1     [-75.9375, -73.125]
+...
+```
+
+The first bit is effectively the sign: west of the prime meridian is 0, east is 1. For latitude, the first bit is south (0) vs. north (1) of the equator.
+
+Each bit halves the remaining uncertainty. After 26 iterations:
+
+```text
+longitude: 360°   / 2^26 ≈ 0.6 meters at the equator
+latitude:  170.1° / 2^26 ≈ 0.28 meters
+```
+
+Every coordinate on Earth snaps to a cell roughly 0.6m × 0.3m. That quantization is the source of the small bounded distance error in `GEODIST`.
+
+2. Interleaves the bits of the two integers into one 52-bit number.
+
+Interleaving is the important step:
+
+```text
+lon bits: L0 L1 L2 L3 ...
+lat bits: B0 B1 B2 B3 ...
+
+score:    L0 B0 L1 B1 L2 B2 ...
+```
+
+Because the bits alternate at every level of precision, coordinates that are physically close tend to produce numerically close scores.
+
+The geohash is effectively a 1D projection of a 2D location, similar in spirit to a Z-order curve.
+
+3. Stores the result as an ordinary Sorted Set entry:
+
+```text
+member = "driver:1"
+score  = 1791876145287086
+```
+
+You can observe this directly:
+
+```redis
+ZRANGE drivers 0 -1 WITHSCORES
+```
+
+The geo commands are a specialized interface over the same underlying ZSET.
+
+### Querying: GEOSEARCH
+
+Suppose a rider opens the app and we need:
+
+```redis
+GEOSEARCH drivers FROMLONLAT -73.98 40.75 BYRADIUS 5 KM ASC COUNT 10
+```
+
+Conceptually, Redis performs:
+
+```text
+1. compute the bounding box of the 5 km circle
+2. translate that box into geohash score ranges
+3. fetch candidates with a sorted-set range query
+4. also inspect the 8 neighboring geohash cells
+5. filter candidates by exact great-circle distance
+6. return the nearest matches
+```
+
+Step 4 matters because a point just outside your geohash cell boundary can still lie inside the search radius.
+
+The expensive global scan disappears:
+
+```text
+naive approach:
+    compare rider against every driver
+
+Redis approach:
+    range query on geohash scores
+    + exact distance check on a small candidate set
+```
+
+Complexity is approximately:
+
+```text
+O(log N + candidates)
+```
+
+rather than:
+
+```text
+O(N)
+```
+
+### Distance: GEODIST
+
+```redis
+GEODIST drivers driver:1 driver:2 KM
+```
+
+Redis decodes both scores back into coordinates and applies the haversine formula.
+
+Because coordinates were quantized into the 52-bit grid during encoding, distances carry a small bounded error.
+
+### Concrete example
+
+```redis
+GEOADD drivers -73.9857 40.7484 "driver:1"
+GEOADD drivers -73.9910 40.7520 "driver:2"
+GEOADD drivers -73.8700 40.6800 "driver:3"
+```
+
+Rider requests nearby drivers:
+
+```redis
+GEOSEARCH drivers FROMLONLAT -73.9860 40.7490 BYRADIUS 2 KM ASC
+```
+
+Conceptual result:
+
+```text
+driver:1    0.05 km
+driver:2    0.55 km
+```
+
+`driver:3` is excluded even though it may share a nearby geohash region, because the exact distance filter rejects it.
+
+### Why this design works well
+
+- Redis reuses the existing Sorted Set implementation, including its skip list, memory optimizations, and cluster sharding.
+- Geo keys behave like ordinary ZSET keys, so commands such as `ZREM` still work:
+
+```redis
+ZREM drivers driver:1
+```
+
+- Sharding follows normal Redis Cluster rules: the geo key maps to one hash slot like any other key.
+
+### Limitations
+
+- Points only; no polygons or arbitrary shapes.
+- One geo index per key; modeling multiple location categories requires separate keys.
+- Coordinates are quantized, so distances are approximate within a small bounded error.
+- Like any single Redis key, an extremely hot geo index can become a hot-key problem.
+
+---
+
 # 3.9 Bitmaps and Approximate Structures
 
 Bitmaps are useful when a domain consists of many boolean flags.
@@ -751,6 +1000,84 @@ Was user 123 active today?
 ```
 
 This can be dramatically more memory-efficient than one key per fact.
+
+## Concrete example: daily active users
+
+Suppose you want to track which users were active on a given day.
+
+One key per fact:
+
+```redis
+SET active:2026-09-02:user:1 1
+SET active:2026-09-02:user:2 1
+SET active:2026-09-02:user:3 1
+```
+
+With 100 million users, that is up to 100 million keys per day, each carrying key-name bytes, object metadata, and hash-table overhead.
+
+Bitmap approach:
+
+```redis
+SETBIT active:2026-09-02 1 1
+SETBIT active:2026-09-02 2 1
+SETBIT active:2026-09-02 3 1
+```
+
+Conceptually, the value is one long bit array where the **offset is the user ID**:
+
+```text
+key: active:2026-09-02
+
+offset:  0 1 2 3 4 5 6 7 ...
+bit:     0 1 1 1 0 0 0 0 ...
+              ^
+              user 2 was active
+```
+
+Common questions map to single commands:
+
+```redis
+GETBIT active:2026-09-02 123        # was user 123 active today?
+BITCOUNT active:2026-09-02          # how many users were active today?
+```
+
+Bitwise composition answers cross-day questions without materializing per-user sets:
+
+```redis
+BITOP AND active:both-days active:2026-09-01 active:2026-09-02
+BITCOUNT active:both-days           # users active on both days (retention)
+```
+
+Memory comparison at 100 million users:
+
+```text
+one key per user:   billions of bytes (key names + metadata dominate)
+bitmap:             100,000,000 bits ≈ 12 MB
+```
+
+The trade-offs:
+
+- user IDs must map to integer offsets, so this fits numeric ID spaces better than arbitrary strings;
+- a sparse ID space wastes memory, since the bitmap grows to the highest offset used;
+- `BITOP` on huge bitmaps is another unbounded command, so the boundedness rule still applies.
+
+## Approximate structures
+
+The same "denser representation" idea extends to structures that trade exactness for memory:
+
+```text
+HyperLogLog  -> approximate unique counts with tiny fixed memory
+Bloom filter -> approximate membership with no false negatives
+```
+
+Example:
+
+```redis
+PFADD visitors:2026-09-02 user:123
+PFCOUNT visitors:2026-09-02
+```
+
+A HyperLogLog estimates unique visitors using kilobytes regardless of whether you saw ten users or ten billion, at the cost of a small error rate.
 
 General heuristic:
 
@@ -1037,6 +1364,58 @@ Do not assume Redis transactions behave exactly like relational database transac
 
 The rollback and error semantics are different.
 
+### No rollback
+
+In a relational database, an error mid-transaction lets you roll back everything:
+
+```text
+all commands succeed, or none do
+```
+
+Redis instead guarantees only:
+
+```text
+all commands run, in order, without interleaving
+```
+
+Two error classes behave differently:
+
+**Queue-time errors** (syntax errors, unknown commands) are caught while queueing:
+
+```text
+MULTI
+SET x 1
+BADCOMMAND foo        <- rejected at queue time
+EXEC                  <- EXECABORT: nothing runs
+```
+
+Nothing executed, so there was nothing to roll back.
+
+**Runtime errors** (syntactically valid commands that fail at execution, such as `WRONGTYPE`) do not stop the transaction:
+
+```text
+MULTI
+SET x 1
+LPUSH x "a"           <- fails: WRONGTYPE
+INCR y                <- still executes
+EXEC
+1) OK
+2) (error) WRONGTYPE ...
+3) (integer) 1
+```
+
+Commands before and after the failure are applied and stay applied. There is no undo.
+
+Redis chose this deliberately: no rollback machinery keeps the hot path simple and fast, and runtime errors like `WRONGTYPE` are treated as programming bugs that should surface during development.
+
+`WATCH` is not rollback either. It is optimistic concurrency control: if a watched key changed before `EXEC`, the transaction simply does not run and the application retries.
+
+Practical implications:
+
+- validate preconditions before `EXEC`, because you cannot undo after;
+- Lua scripts share the same caveat: a script that errors midway stops, but its earlier writes are not reverted;
+- Redis transactions give you isolation and atomicity of execution order, not atomicity of outcome.
+
 ---
 
 # 6.2 Lua Scripts and Redis Functions
@@ -1056,6 +1435,56 @@ else:
 Doing this through separate network commands introduces races.
 
 A Lua script or Redis Function can move the logic into Redis and execute atomically.
+
+## Concrete example: fixed-window rate limiter
+
+The naive client-side version races:
+
+```text
+client A: GET rate:user:42        -> 99
+client B: GET rate:user:42        -> 99
+client A: INCR rate:user:42       -> 100
+client B: INCR rate:user:42       -> 101
+```
+
+Both clients observed 99, both believed the limit of 100 was not yet reached, and the counter overshot.
+
+The same logic as a Lua script:
+
+```lua
+-- KEYS[1] = rate limit key
+-- ARGV[1] = limit
+-- ARGV[2] = window in seconds
+
+local current = tonumber(redis.call("GET", KEYS[1]) or "0")
+
+if current >= tonumber(ARGV[1]) then
+    return 0
+end
+
+current = redis.call("INCR", KEYS[1])
+
+if current == 1 then
+    redis.call("EXPIRE", KEYS[1], ARGV[2])
+end
+
+return 1
+```
+
+Invoked as:
+
+```redis
+EVAL "..." 1 rate:user:42 100 60
+```
+
+The entire read-check-increment-TTL sequence executes as one atomic step. No other client's command can interleave between the `GET` and the `INCR`, so the overshoot above becomes impossible.
+
+Two details worth noticing:
+
+- `INCR` creates the key if absent, so the script treats a missing key as zero.
+- The TTL is set only on the first increment of a window, avoiding an `EXPIRE` on every request.
+
+Redis Functions package the same idea as a named, persisted unit instead of sending the script text with each call.
 
 That is useful, but atomicity comes at a cost:
 
