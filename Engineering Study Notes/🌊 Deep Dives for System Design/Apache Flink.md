@@ -14,7 +14,7 @@ tags:
   - stateful-stream-processing
   - staff-plus
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-09-12
 version_baseline: "Apache Flink 2.3.0"
 status: evergreen
 ---
@@ -1031,17 +1031,18 @@ Event-time correctness uses `occurred_at`.
 
 A watermark is Flink's statement about **event-time progress**.
 
-Roughly:
+Official meaning:
 
 ```text
-watermark = W
+Watermark(t)
 
-=> the system believes it has progressed past event time W
+=> event time has reached t
+=> there should be no more records with timestamp <= t
 ```
 
-It is not an absolute promise that no older record can ever arrive.
+It is not an absolute promise that no older record can ever arrive. A later record with timestamp `<= t` is simply **late**.
 
-Watermarks allow the system to decide when event-time timers and windows can progress despite out-of-order streams.
+Event-time timers and windows typically fire when the watermark **reaches** the relevant deadline (`watermark >= deadline`), not only after it has gone strictly past that timestamp. That is how Flink can close windows and fire timers despite out-of-order streams.
 
 For multi-input operators, effective watermark progress is constrained by the slowest relevant input; Flink documents two-input operator watermark progress as the minimum of its inputs.
 
@@ -1122,7 +1123,7 @@ Watermark alignment is therefore not merely a correctness feature. It can be a *
 
 # 14. Windows and Late Data
 
-Flink's event-time windows remain until the watermark progresses beyond the window end plus configured allowed lateness.
+Flink's event-time windows remain until the watermark reaches the window end plus configured allowed lateness.
 
 By default, allowed lateness is zero. Late elements beyond the accepted boundary can be dropped or routed through a side output. Late-but-accepted events can cause additional firings, so downstream consumers must be able to interpret updated results.
 
@@ -1131,7 +1132,7 @@ timeline
     title Event-time window
     12:00 : window starts
     12:05 : logical window end
-    12:05 : first firing when watermark passes boundary
+    12:05 : first firing when watermark reaches the boundary
     12:06 : allowed lateness expires
     12:06 : window state can be removed
 ```
@@ -3519,7 +3520,7 @@ Apache marks ForSt/disaggregated state as experimental/not fully production-read
 
 ### 9. **B**
 
-A watermark communicates Flink's progress through **event time**. It is not a mathematical guarantee that an older event can never arrive.
+A watermark `t` means event time has **reached** `t` and there should be no more records with timestamp `<= t`. It is not a mathematical guarantee that an older event can never arrive; such a record is late.
 
 ### 10. **B**
 
