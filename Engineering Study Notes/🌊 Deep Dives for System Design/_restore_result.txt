@@ -1,0 +1,10 @@
+source=load_source_text:local file
+source_lines=1160
+before_lines=1160
+after_lines=1114
+frontmatter_ok=True
+no_dup_h1=True
+section_21_ok=True
+answers_ok=True
+answer_fmt_ok=True
+no_chatgpt=True

@@ -13,9 +13,8 @@ aliases:
   - Redis System Design
 created: 2026-08-19
 updated: 2026-08-19
+status: ✅
 ---
-
-
 > [!summary]
 > Redis is best understood not merely as an "in-memory key-value cache," but as a **data-structure execution engine with serialized command execution, expiration, optional persistence, asynchronous replication, and sharding**.
 >

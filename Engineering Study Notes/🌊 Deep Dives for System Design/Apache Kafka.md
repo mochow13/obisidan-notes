@@ -1,5 +1,5 @@
 ---
-title: "Kafka for System Design Interviews"
+title: Kafka for System Design Interviews
 aliases:
   - Kafka System Design
   - Kafka Interview Deep Dive
@@ -10,9 +10,9 @@ tags:
   - distributed-systems
   - event-streaming
   - message-queues
-status: evergreen
-source: "https://www.youtube.com/watch?v=DU8o-OTeoCc"
-source_title: "Kafka System Design Deep Dive w/ a Ex-Meta Staff Engineer — Hello Interview"
+status: ✅
+source: https://www.youtube.com/watch?v=DU8o-OTeoCc
+source_title: Kafka System Design Deep Dive w/ a Ex-Meta Staff Engineer — Hello Interview
 created: 2026-08-17
 updated: 2026-08-17
 ---
