@@ -11,8 +11,8 @@
 - [x] [Leader election in distributed systems](https://aws.amazon.com/builders-library/leader-election-in-distributed-systems/)
 - [x] [Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
 - [x] [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-- [ ] [Building and deploying MySQL Raft at Meta](https://engineering.fb.com/2023/05/16/data-infrastructure/mysql-raft-meta/)
-- [ ] [Versioning versus Coordination](https://brooker.co.za/blog/2025/02/04/versioning.html)
+- [x] [Building and deploying MySQL Raft at Meta](https://engineering.fb.com/2023/05/16/data-infrastructure/mysql-raft-meta/)
+- [x] [Versioning versus Coordination](https://brooker.co.za/blog/2025/02/04/versioning.html)
 - [ ] [Why Strong Consistency?](https://brooker.co.za/blog/2025/11/18/consistency.html)
 - [ ] [Snapshot Isolation vs Serializability](https://brooker.co.za/blog/2024/12/17/occ-and-isolation/)
 - [ ] [What Fekete's Anomaly Can Teach Us About Isolation](https://brooker.co.za/blog/2025/02/05/feketes.html)
@@ -24,7 +24,7 @@
 
 ## Databases & storage systems
 
-- [ ] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql/)
+- [x] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql/)
 - [ ] [How Uber Conquered Database Overload: The Journey from Static Rate-Limiting to Intelligent Load Management](https://www.uber.com/en-DE/blog/from-static-rate-limiting-to-intelligent-load-management/)
 - [ ] [How Uber Serves over 150 Million Reads per Second from Integrated Cache with Stronger Consistency Guarantees](https://www.uber.com/us/en/blog/how-uber-serves-over-150-million-reads/)
 - [ ] [Differential Backups in MyRocks Based Distributed Databases at Uber](https://www.uber.com/en-CA/blog/differential-backups-on-myrocks/)

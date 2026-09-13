@@ -42,7 +42,7 @@ For each talk, capture:
 
 ### 2026
 
-- [ ] [Architecting Infrastructure for the AI Native Future: Scaling Autonomous Agents on Google TPUs](https://atscaleconference.com/videos/architecting-infrastructure-for-the-ai-native-future-scaling-autonomous-agents-on-google-tpus/) — 2026
+- [x] [Architecting Infrastructure for the AI Native Future: Scaling Autonomous Agents on Google TPUs](https://atscaleconference.com/videos/architecting-infrastructure-for-the-ai-native-future-scaling-autonomous-agents-on-google-tpus/) — 2026
 - [ ] [Data Governance in the World of Agents](https://atscaleconference.com/videos/data-governance-in-the-world-of-agents/) — 2026
 - [ ] [Our Journey to Safely Unleash Agents at Meta Scale](https://atscaleconference.com/videos/our-journey-to-safely-unleash-agents-at-meta-scale/) — 2026
 - [ ] [The Agentic Infrastructure Gap: In-Distribution Languages Make It a Coding Problem](https://atscaleconference.com/videos/the-agentic-infrastructure-gap-in-distribution-languages-make-it-a-coding-problem/) — 2026
