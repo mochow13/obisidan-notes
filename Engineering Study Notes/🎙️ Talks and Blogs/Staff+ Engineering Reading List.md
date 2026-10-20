@@ -20,12 +20,12 @@
 - [ ] [Amazon RDS for PostgreSQL 17.4](https://jepsen.io/analyses/amazon-rds-for-postgresql-17.4)
 - [ ] [TigerBeetle 0.16.11](https://jepsen.io/analyses/tigerbeetle-0.16.11)
 - [ ] [NATS 2.12.1](https://jepsen.io/analyses/nats-2.12.1)
-- [ ] [A Byzantine failure in the real world](https://blog.cloudflare.com/a-byzantine-failure-in-the-real-world/)
+- [x] [A Byzantine failure in the real world](https://blog.cloudflare.com/a-byzantine-failure-in-the-real-world/)
 
 ## Databases & storage systems
 
 - [x] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql/)
-- [ ] [How Uber Conquered Database Overload: The Journey from Static Rate-Limiting to Intelligent Load Management](https://www.uber.com/en-DE/blog/from-static-rate-limiting-to-intelligent-load-management/)
+- [x] [How Uber Conquered Database Overload: The Journey from Static Rate-Limiting to Intelligent Load Management](https://www.uber.com/en-DE/blog/from-static-rate-limiting-to-intelligent-load-management/)
 - [ ] [How Uber Serves over 150 Million Reads per Second from Integrated Cache with Stronger Consistency Guarantees](https://www.uber.com/us/en/blog/how-uber-serves-over-150-million-reads/)
 - [ ] [Differential Backups in MyRocks Based Distributed Databases at Uber](https://www.uber.com/en-CA/blog/differential-backups-on-myrocks/)
 - [ ] [Building a Next-Generation Key-Value Store at Airbnb](https://airbnb.tech/infrastructure/building-a-next-generation-key-value-store-at-airbnb/)
