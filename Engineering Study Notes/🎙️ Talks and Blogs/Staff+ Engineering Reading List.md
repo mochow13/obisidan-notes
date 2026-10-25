@@ -26,7 +26,7 @@
 
 - [x] [Scaling PostgreSQL to power 800 million ChatGPT users](https://openai.com/index/scaling-postgresql/)
 - [x] [How Uber Conquered Database Overload: The Journey from Static Rate-Limiting to Intelligent Load Management](https://www.uber.com/en-DE/blog/from-static-rate-limiting-to-intelligent-load-management/)
-- [ ] [How Uber Serves over 150 Million Reads per Second from Integrated Cache with Stronger Consistency Guarantees](https://www.uber.com/us/en/blog/how-uber-serves-over-150-million-reads/)
+- [x] [How Uber Serves over 150 Million Reads per Second from Integrated Cache with Stronger Consistency Guarantees](https://www.uber.com/us/en/blog/how-uber-serves-over-150-million-reads/)
 - [ ] [Differential Backups in MyRocks Based Distributed Databases at Uber](https://www.uber.com/en-CA/blog/differential-backups-on-myrocks/)
 - [ ] [Building a Next-Generation Key-Value Store at Airbnb](https://airbnb.tech/infrastructure/building-a-next-generation-key-value-store-at-airbnb/)
 - [ ] [From Static Rate Limiting to Adaptive Traffic Management in Airbnb's Key-Value Store](https://airbnb.tech/infrastructure/from-static-rate-limiting-to-adaptive-traffic-management-in-airbnbs-key-value-store/)
