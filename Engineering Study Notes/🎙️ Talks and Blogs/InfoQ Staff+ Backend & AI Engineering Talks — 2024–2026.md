@@ -67,7 +67,7 @@ For each talk, capture:
 
 ### 2026
 
-- [ ] [Keeping ChatGPT Fast as AI Development Accelerates](https://www.infoq.com/presentations/openai-performance-engineering-agentic-coding/) — 2026
+- [x] [Keeping ChatGPT Fast as AI Development Accelerates](https://www.infoq.com/presentations/openai-performance-engineering-agentic-coding/) — 2026
 - [ ] [From ms to µs: OSS Valkey Architecture Patterns for Modern AI](https://www.infoq.com/presentations/valkey-architecture-patterns/) — 2026
 - [ ] [Latency: the Race to Zero...Are We There Yet?](https://www.infoq.com/presentations/latency-techniques/) — 2026
 
