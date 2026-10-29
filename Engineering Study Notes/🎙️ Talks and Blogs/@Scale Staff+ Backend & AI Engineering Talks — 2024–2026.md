@@ -54,7 +54,7 @@ For each talk, capture:
 
 - [ ] [A Planet-Scale Computer – Abstract Away Regions via Global Service Placer (GSP)](https://atscaleconference.com/videos/a-planet-scale-computer-abstract-away-regions-via-global-service-placer-gsp/) — 2025
 - [ ] [Gang Scheduling for Llama](https://atscaleconference.com/videos/gang-scheduling-for-llama/) — 2025
-- [ ] [How We’re Scaling Discovery at Netflix Reliably](https://atscaleconference.com/videos/how-were-scaling-discovery-at-netflix-reliably/) — 2025
+- [x] [How We’re Scaling Discovery at Netflix Reliably](https://atscaleconference.com/videos/how-were-scaling-discovery-at-netflix-reliably/) — 2025
 - [ ] [Splitting the Monolith](https://atscaleconference.com/videos/splitting-the-monolith/) — 2025
 - [ ] [Building KVStore for ML Workloads at Pinterest](https://atscaleconference.com/videos/building-kvstore-for-ml-workloads-at-pinterest/) — 2025
 - [ ] [Beyond RAG: Production-Ready AI Agents Powered by Enterprise-Scale Data](https://atscaleconference.com/videos/beyond-rag-production-ready-ai-agents-powered-by-enterprise-scale-data/) — 2025
