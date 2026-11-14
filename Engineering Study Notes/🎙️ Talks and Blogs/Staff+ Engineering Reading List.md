@@ -30,7 +30,7 @@
 - [ ] [Differential Backups in MyRocks Based Distributed Databases at Uber](https://www.uber.com/en-CA/blog/differential-backups-on-myrocks/)
 - [x] [Building a Next-Generation Key-Value Store at Airbnb](https://airbnb.tech/infrastructure/building-a-next-generation-key-value-store-at-airbnb/)
 - [x] [From Static Rate Limiting to Adaptive Traffic Management in Airbnb's Key-Value Store](https://airbnb.tech/infrastructure/from-static-rate-limiting-to-adaptive-traffic-management-in-airbnbs-key-value-store/)
-- [ ] [How Stripe's document databases supported 99.999% uptime with zero-downtime data migrations](https://stripe.dev/blog/how-stripes-document-databases-supported-99.999-uptime-with-zero-downtime-data-migrations)
+- [x] [How Stripe's document databases supported 99.999% uptime with zero-downtime data migrations](https://stripe.dev/blog/how-stripes-document-databases-supported-99.999-uptime-with-zero-downtime-data-migrations)
 - [ ] [How Stripe uses graph search and state machines to auto-remediate a global database fleet](https://stripe.dev/blog/how-stripe-uses-graph-search-and-state-machines-to-auto-remediate-a-global-database-fleet)
 - [ ] [Ledger: Stripe's system for tracking and validating money movement](https://stripe.dev/blog/ledger-stripe-system-for-tracking-and-validating-money-movement)
 - [ ] [Building D1: a Global Database](https://blog.cloudflare.com/building-d1-a-global-database/)
