@@ -56,8 +56,8 @@ For each talk, capture:
 
 ## 2025
 
-- [ ] [Software Design, Architecture & Giving Clarity at Scale](https://gotopia.tech/sessions/3932/software-design-architecture-and-giving-clarity-at-scale) — GOTO Copenhagen 2025
-- [ ] [Platforms: Build Abstractions, not Illusions](https://gotopia.tech/sessions/3672/platforms-build-abstractions-not-illusions) — GOTO Copenhagen 2025
+- [x] [Software Design, Architecture & Giving Clarity at Scale](https://gotopia.tech/sessions/3932/software-design-architecture-and-giving-clarity-at-scale) — GOTO Copenhagen 2025
+- [x] [Platforms: Build Abstractions, not Illusions](https://gotopia.tech/sessions/3672/platforms-build-abstractions-not-illusions) — GOTO Copenhagen 2025
 - [ ] [Residues: Time, Change and Uncertainty in Software Architecture](https://gotopia.tech/sessions/3595/residues-time-change-and-uncertainty-in-software-architecture) — GOTO Copenhagen 2025
 - [ ] [Master Software Architecture: From Simplicity to Complexity](https://gotopia.tech/sessions/3660/master-software-architecture-from-simplicity-to-complexity) — GOTO Copenhagen 2025
 - [ ] [Gen AI Grows Up: Building Production-Ready Agents on the JVM](https://gotopia.tech/conferences/105/goto-copenhagen-2025) — GOTO Copenhagen 2025
