@@ -38,7 +38,7 @@
 - [ ] [Performance isolation in a multi-tenant database environment](https://blog.cloudflare.com/performance-isolation-in-a-multi-tenant-database-environment)
 - [ ] [TiDB Adoption at Pinterest](https://medium.com/pinterest-engineering/tidb-adoption-at-pinterest-1130ab787a10)
 - [ ] [Future-proofing our metadata stack with Panda, a scalable key-value store](https://dropbox.tech/infrastructure/panda-metadata-stack-petabyte-scale-transactional-key-value-store)
-- [ ] [We replaced Redis with MySQL for inventory reservations—and it scaled](https://shopify.engineering/scaling-inventory-reservations)
+- [x] [We replaced Redis with MySQL for inventory reservations—and it scaled](https://shopify.engineering/scaling-inventory-reservations)
 - [ ] [How Discord Automates ScyllaDB Clusters at Scale](https://discord.com/blog/how-discord-automates-scylladb-clusters-at-scale)
 - [ ] [FishDB: a generic retrieval engine for scaling LinkedIn's feed](https://www.linkedin.com/blog/engineering/infrastructure/fishdb-a-generic-retrieval-engine-for-scaling-linkedins-feed)
 - [ ] [What Does a Database for SSDs Look Like?](https://brooker.co.za/blog/2025/12/15/database-for-ssd.html)
